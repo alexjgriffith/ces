@@ -1,0 +1,14 @@
+* ces.el
+
+A Component Entity System for emacs.
+
+** Installation
+
+Clone this repository and add the lisp directory to your load path.
+Then, require it and go.
+
+#+BEGIN_SRC emacs-lisp
+    (add-to-list 'load-path "/path/to/ces.el/lisp")
+    (require 'mastodon)
+#+END_SRC
+

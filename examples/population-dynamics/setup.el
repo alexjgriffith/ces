@@ -1,0 +1,110 @@
+;; -*- lexical-binding: t -*-
+
+(defun new-plant (location)
+  (put-in-location
+   location
+   (add-components (new-entity "plant" )
+                   (gen-component 'render "P")
+                   (gen-component 'floor)
+                   (gen-component 'autotroph)
+                   (gen-component 'plant 1 5)
+                   (gen-component 'size 10 100 1)
+                   (gen-component 'reproduction 'dormant 0
+                                  '((dormant 10) (flowering 2) (reproductive 1))
+                                  30 'reproductive)
+                   (gen-component 'where location)
+                   )))
+
+
+(defun new-deer (location)
+  (put-in-location
+   location
+   (add-components (new-entity "deer")
+                   (gen-component 'render "D")
+                   (gen-component 'obj)
+                   (gen-component 'herbivore)
+                   (gen-component 'deer)
+                   (gen-component 'where location)
+                   (gen-component 'hunger 300 300 1)
+                   (gen-component 'size 10 1000 1)
+                   (gen-component 'reproduction 'dormant 0
+                                  '((dormant 100) (pregnant 10) (reproductive 1))
+                                  100 'reproductive))))
+
+(defun put-in-location (location ent-id)
+  (puthash ent-id t (plist-get (cdr (assoc 'contains (components-f (e2c-f location)))) :hash))
+  ent-id)
+
+(defun remove-from-location (location ent-id)
+  (remhash ent-id (plist-get (cdr (assoc 'contains (components-f (e2c-f location)))) :hash))
+  location)
+
+(defun add-exit (location key exit-id)
+  (puthash key exit-id (plist-get (cdr (assoc 'exits (components-f (e2c-f location)))) :hash))
+  location)
+
+(defun new-location ()
+  (add-components (new-entity "location" )
+                  (gen-component 'location 64 20)
+                  (gen-component 'contains (make-hash-table))
+                  (gen-component 'exits (make-hash-table))))
+
+(defun init-setup ()
+  (let ((location-1 (new-location))
+        (location-2 (new-location))
+        (location-3 (new-location))
+        (location-4 (new-location))
+        (player-id (new-entity "player"))
+        (mob-id-1 (new-entity "mob"))
+        (mob-id-2 (new-entity "mob"))        
+        (c1 (gen-component 'stats 7 7 7))
+        (c5 (gen-component 'pos 0 0 0))
+        (c2 (gen-component 'stats 7 7 7))
+        (c3 (gen-component 'stats 7 7 7))
+        (c4 (gen-component 'description  "This is the end. My only friend, the end.")))
+    (add-exit (add-exit location-1 "south" location-3) "east" location-2)
+    (add-exit (add-exit location-2 "south" location-4) "west" location-1)
+    (add-exit (add-exit location-3 "north" location-1) "east" location-4)
+    (add-exit (add-exit location-4 "north" location-2) "west" location-3)
+    (add-components player-id c1 c4 c5 (gen-component 'where location-1))
+    (add-components mob-id-1 c2)
+    (add-components mob-id-2 c3)
+    (new-plant location-1)
+    (new-plant location-1)
+    (new-plant location-1)
+    (new-plant location-2)
+    (new-plant location-3)
+    (new-plant location-4)
+    (new-deer location-1)
+    ;; (remove-entity 4)
+    (insert-general-into-generals 'my-location location-1)
+    (insert-general-into-generals 'input 1)       
+    ;;(remove-component player-id 'description)
+    ))
+
+(defun game ()
+   (initialized
+    'init-systems
+    'init-components
+    'init-setup))
+
+(defun game-loop (step)
+  ;; (call-system 'grow)
+  ;; (call-system 'reproduce)
+  (call-system 'graze)
+  (with-current-buffer (get-buffer-create "*game-log*")
+    (goto-char (point-max))
+    (insert (format "step = %s creatrures = %s\n" step (call-system 'viz))))
+  ;;(c2e-f 'plant)
+  ;;(pp (components-f (e2c 3)))
+  ;;(message (format "ents %s" (length (hash-table-keys (c2e-f 'plant)))))
+  )
+
+(defun trial-run ()
+  (interactive)
+  (let ((game-state (game)))
+    (with-current-buffer (get-buffer-create "*game-log*" ) (delete-region (point-min)
+                                                                          (point-max)))
+    (let ((x 0))
+      (while (< x 500) (setq x (+ x 1))
+             (tick game-state (lambda() (game-loop x)))))))
