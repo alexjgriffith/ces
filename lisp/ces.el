@@ -27,59 +27,13 @@
 
 ;;; Code:
 
-(defvar c2e nil)
-(defvar e2c nil)
-(defvar components nil)
-(defvar entities nil)
-(defvar generals nil)
-(defvar components-def nil)
-(defvar systems-def nil)
-
-;; A vector that automatically grows
-(defun gvec-new (&optional length grow)
-  (let ((vector (make-vector (or length 64) nil))
-        (grow (or grow 0.8))
-        (length (or length 64))
-        (index 0))
-    (lambda(action &rest cargs)
-      (cond
-       ((equal action 'insert)
-        (let ((arg-value (car cargs)))
-          (when (> index (* grow length) )
-            (setq vector (vconcat vector (make-vector length nil)))
-            (setq length (* 2 length)))
-          (aset vector index arg-value)
-          (setq index (+ index 1))
-          (- index 1)))
-       ((equal action 'get )
-        (let ((arg-index (car cargs)))
-          (when (> index arg-index)
-            (aref vector arg-index))))
-       ((equal action 'set )
-        (let ((arg-index (car cargs))
-              (arg-value (cadr cargs)))
-          (when (> index arg-index)
-            (aset vector arg-index arg-value))))
-       ((equal action 'vector) vector)
-       ((equal action 'index) index)))))
-
-(defun gvec-insert (value gvec)
-  (funcall gvec 'insert value))
-
-(defun gvec-get (index gvec)
-  (funcall gvec 'get index))
-
-(defun gvec-set (index value gvec)
-  (funcall gvec 'set index value))
-
-(defun gvec-rem (index gvec)
-  (funcall gvec 'set index nil))
-
-(defun gvec-to-vector ( gvec)
-  (funcall gvec 'vector))
-
-(defun gvec-index (gvec)
-  (funcall gvec 'index))
+;; (defvar c2e nil)
+;; (defvar e2c nil)
+;; (defvar components nil)
+;; (defvar entities nil)
+;; (defvar generals nil)
+;; (defvar components-def nil)
+;; (defvar systems-def nil)
 
 (defun make-set ()
   (make-hash-table))
@@ -134,6 +88,16 @@
       (setq elemb (pop listb)))
     (reverse ret)))
 
+(defun zip2-cons (lista listb)
+  (let ((elema (pop lista))
+        (elemb (pop listb))
+        ret)
+    (while (and elema elemb)
+      (push (cons elema elemb ) ret)
+      (setq elema (pop lista))
+      (setq elemb (pop listb)))
+    (reverse ret)))
+
 (defun insert-into-hash-set (index value hash)
   (let ((selection (gethash index hash)))
     (unless selection
@@ -158,17 +122,35 @@
     (when components (add-components id components))
     id))
 
+(defun ces-insert-component-bld (start-key)
+  (let ((key start-key))
+    (lambda (value)
+      (puthash key value components)
+      (setq key (+ key 1))
+      (- key 1))))
+
+(defun ces-insert-entity-bld (start-key)
+  (let ((key start-key))
+    (lambda (value)
+      (puthash key value entities)
+      (setq key (+ key 1))
+      (- key 1))))
+
 (defun init-globs ()
   (setq c2e (make-hash-table))
   (setq e2c (make-hash-table))
   (setq generals (make-hash-table))
   (setq components-def (make-hash-table))
   (setq systems-def (make-hash-table))
-  (setq components (gvec-new))
-  (setq entities (gvec-new)))
+  (setq components (make-hash-table))
+  (setq c-insert (ces-insert-component-bld 0))
+  (setq e-insert (ces-insert-entity-bld 0))
+  (setq entities (make-hash-table))
+  (setq message-queue '()))
 
 (defun initialized (init-systems init-components setup)
-  (let (c2e e2c components entities generals components-def systems-def)
+  (let (c2e e2c components entities generals components-def systems-def
+            c-insert e-insert message-queue)
     (init-globs)
     (funcall init-systems)
     (funcall init-components)
@@ -177,16 +159,16 @@
           :generals generals :components-def components-def :systems-def systems-def)))
 
 (defun insert-component-into-components (value)
-  (gvec-insert value components))
+  (funcall c-insert value))
 
 (defun remove-component-from-components (key)
-  (gvec-rem key components))
+  (remhash key components))
 
 (defun insert-entity-into-entities (value)
-  (gvec-insert value entities))
+  (funcall e-insert value))
 
 (defun remove-entity-from-entities (key)
-  (gvec-rem key entities))
+  (remhash key entities))
 
 (defun insert-component-into-e2c (e-id which)
   (insert-into-hash-list e-id which e2c))
@@ -224,8 +206,8 @@
 
 (defun remove-component-from-entity (entity-id component)
   (mapc (lambda(x )
-          (when (equal component (car(gvec-get x components)))
-            (gvec-rem x components)
+          (when (equal component (car(gethash x components)))
+            (remhash x components)
             (remove-component-from-e2c entity-id x)
             (remove-entity-from-c2e entity-id component)))
         (gethash entity-id e2c)))
@@ -239,12 +221,14 @@
           comp-ids) 
     (remove-entity-from-e2c entity-id)))
 
+(defun entity-keys()
+  (hash-table-keys entities))
 
 (defun components-f (comp-list)
-  (mapcar (lambda (index) (gvec-get index components)) comp-list))
+  (mapcar (lambda (index) (gethash index components)) comp-list))
 
 (defun entities-f (ent-list)
-  (mapcar (lambda (index) (gvec-get index entities)) ent-list))
+  (mapcar (lambda (index) (gethash index entities)) ent-list))
 
 (defun generals-f (name)
   (gethash name generals))
@@ -265,7 +249,7 @@
   `(puthash ',name
             (lambda ()
               (let ,(append (mapcar (lambda (x) `(,x (c2e-f ',x))) comps)
-                            (mapcar (lambda (x) `(,x (generals ',x))) gens))
+                            (mapcar (lambda (x) `(,x (generals-f ',x))) gens))
                 ,@body))
             systems-def))
 
@@ -279,18 +263,6 @@
   (mapcar (lambda (ent) (cons ent (components-f (e2c-f ent))))
           (set-to-list (apply 'set-intersect sets))))
 
-;; (defun tick (state callback)
-;;   (let ((c2e (plist-get state :c2e))
-;;         (e2c (plist-get state :e2c))
-;;         (components (plist-get state :components))
-;;         (entities (plist-get state :entities))
-;;         (generals (plist-get state :generals))
-;;         (components-def (plist-get state :components-def))
-;;         (systems-def (plist-get state :systems-def)))
-;;     (funcall callback)
-;;     (list :c2e c2e :e2c e2c :components components :entities entities
-;;           :generals generals :components-def components-def :systems-def systems-def)))
-
 (defun tick (state callback)
   (let ((c2e (plist-get state :c2e))
         (e2c (plist-get state :e2c))
@@ -300,6 +272,73 @@
         (components-def (plist-get state :components-def))
         (systems-def (plist-get state :systems-def)))
     (funcall callback)))
+
+
+;; Serialization and Deserialization tools
+(defun ces-serialize-human-callback ()
+  (mapcar
+       (lambda (ent-id)
+         (let ((comp-ids (e2c-f ent-id)))
+           `(,ent-id
+             ,(get-en ent-id entities)
+             ,(zip2-cons comp-ids (components-f comp-ids)))))
+       (entity-keys) ))
+
+(defun ces-serialize-human (world buffer)
+  (with-current-buffer (get-buffer-create buffer)
+    (let ((str (tick world 'ces-serialize-human-callback)))
+      (goto-char (point-min))
+      (delete-region (point-min) (point-max))
+      (let ((print-level nil)
+            (print-length nil))
+        (insert (pp str))))))
+
+(defun ces-deserialize-human (buffer)
+  (with-current-buffer (get-buffer buffer)
+    (goto-char (point-min))
+    (let ((data (read (current-buffer))))
+      (mapcar
+       (lambda (entity)
+         (let ((ent-id (car entity))
+               (moniker (cadr entity))
+               (c-ids (mapcar 'insert-component-struct-into-components
+                                   (caddr entity))))
+           (new-entity-with-instantiated-components
+            ent-id moniker c-ids (mapcar 'car (components-f c-ids)))))
+       data))))
+
+(defun ces-set-c&e-insert ()
+  (setq e-insert (ces-insert-entity-bld
+                  (+ 1 (apply 'max (hash-table-keys entities)))))
+  (setq c-insert (ces-insert-component-bld
+                  (+ 1 (apply 'max (hash-table-keys components))))))
+
+(defun insert-component-struct-into-components (cstruct)
+  (let ((c-id (car cstruct))
+        (component (cdr cstruct)))
+    (puthash c-id component components)
+    c-id))
+
+(defun new-entity-with-instantiated-components (ent-id moniker c-ids cnames)
+  (puthash ent-id moniker entities)
+  (mapc (lambda(c-id)
+          (insert-component-into-e2c ent-id c-id))
+        c-ids)
+  (mapc (lambda (cname)
+          (insert-entity-into-c2e ent-id cname))
+        cnames)        
+  ent-id)
+
+(defun initialize-from-human-seraialized (init-systems init-components buffer)
+  (let (c2e e2c components entities generals components-def systems-def
+            c-insert e-insert)
+    (init-globs)
+    (funcall init-systems)
+    (funcall init-components)
+    (ces-deserialize-human buffer)
+    (ces-set-c&e-insert)
+    (list :c2e c2e :e2c e2c :components components :entities entities
+          :generals generals :components-def components-def :systems-def systems-def)))
 
 (provide 'ces)
 ;;; ces.el ends here
