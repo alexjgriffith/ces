@@ -10,7 +10,7 @@
   (new-component! herbivore)
   (new-component! carnivore)
   (new-component! hunger :current :max :rate )  
-  (new-component! location :floor-size :obj-limit)
+  (new-component! location :floor-size :obj-limit :description)
   (new-component! where :location)
   (new-component! reproduction :state :step :stages :min-size :reproduce-on)
   (new-component! pos :x :y :z)

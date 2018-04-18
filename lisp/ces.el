@@ -27,14 +27,6 @@
 
 ;;; Code:
 
-;; (defvar c2e nil)
-;; (defvar e2c nil)
-;; (defvar components nil)
-;; (defvar entities nil)
-;; (defvar generals nil)
-;; (defvar components-def nil)
-;; (defvar systems-def nil)
-
 (defun make-set ()
   (make-hash-table))
 
@@ -152,8 +144,8 @@
   (let (c2e e2c components entities generals components-def systems-def
             c-insert e-insert message-queue)
     (init-globs)
-    (funcall init-systems)
-    (funcall init-components)
+    (mapc 'funcall init-systems)
+    (mapc 'funcall init-components)
     (funcall setup)
     (list :c2e c2e :e2c e2c :components components :entities entities
           :generals generals :components-def components-def :systems-def systems-def)))
@@ -166,6 +158,9 @@
 
 (defun insert-entity-into-entities (value)
   (funcall e-insert value))
+
+(defun get-entity-from-entities (key)
+  (gethash key entities))
 
 (defun remove-entity-from-entities (key)
   (remhash key entities))
@@ -280,7 +275,7 @@
        (lambda (ent-id)
          (let ((comp-ids (e2c-f ent-id)))
            `(,ent-id
-             ,(get-en ent-id entities)
+             ,(get-entity-from-entities ent-id)
              ,(zip2-cons comp-ids (components-f comp-ids)))))
        (entity-keys) ))
 
@@ -339,6 +334,9 @@
     (ces-set-c&e-insert)
     (list :c2e c2e :e2c e2c :components components :entities entities
           :generals generals :components-def components-def :systems-def systems-def)))
+
+(defun ces-call-function (state fun)
+  (tick state (lambda () (funcall fun))))
 
 (provide 'ces)
 ;;; ces.el ends here

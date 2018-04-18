@@ -1,5 +1,7 @@
 ;; -*- lexical-binding: t -*-
 
+
+;; Functions that would go in the game code
 (defun new-plant (location)
   (put-in-location
    location
@@ -31,6 +33,8 @@
                                   '((dormant 100) (pregnant 10) (reproductive 1))
                                   100 'reproductive))))
 
+
+;; Functions that would go in the libary code
 (defun put-in-location (loc-id ent-id)
   (puthash ent-id t (comp-get-value (components-f (e2c-f loc-id)) 'contains :hash))
   ent-id)
@@ -76,13 +80,19 @@
   loc-id)
 
 (defun new-location ()
-  (add-components (new-entity "location" )
-                  (gen-component 'location 25 10)
+  (add-components (new-entity "location")
+                  (gen-component 'location 25 10 "")
                   (gen-component 'contains (make-hash-table))
                   (gen-component 'exits (make-hash-table :test 'equal))))
 
+(defun location-add-description (loc-id description)
+  (plist-put (cdr (assoc 'location (components-f (e2c-f loc-id)))) :description description)
+  loc-id)
+
+;; (defun list-exits)
+
 (defun init-setup ()
-  (let ((location-1 (new-location))
+  (let ((location-1 (new-location ""))
         (location-2 (new-location))
         (location-3 (new-location))
         (location-4 (new-location))
@@ -90,7 +100,6 @@
         (mob-id-1 (new-entity "mob"))
         (mob-id-2 (new-entity "mob"))        
         (c1 (gen-component 'stats 7 7 7))
-        (c5 (gen-component 'pos 0 0 0))
         (c2 (gen-component 'stats 7 7 7))
         (c3 (gen-component 'stats 7 7 7))
         (c4 (gen-component 'description  "This is the end. My only friend, the end.")))
@@ -101,6 +110,10 @@
     (add-components player-id c1 c4 c5 (gen-component 'where location-1))
     (add-components mob-id-1 c2)
     (add-components mob-id-2 c3)
+    (location-add-description 0 "A wooded dell.")
+    (location-add-description 1 "A gentle brook flows past.")
+    (location-add-description 2 "A small hill, covered in grass.")
+    (location-add-description 4 "A dense forest.")
     (new-plant location-1)
     (new-plant location-1)
     (new-plant location-1)
@@ -109,11 +122,21 @@
     (new-plant location-4)
     (new-deer location-1)
     ;; (remove-entity 4)
-    (insert-general-into-generals 'my-location location-1)
-    (insert-general-into-generals 'input 1)       
+    (insert-general-into-generals 'player-location location-1)
+    (insert-general-into-generals 'look nil)
+    (insert-general-into-generals 'move nil)
+    (insert-general-into-generals 'quit nil)
+    (insert-general-into-generals 'render nil)
+    (insert-general-into-generals 'exits (list-exits location-1))
     ;;(remove-component player-id 'description)
     ))
 
+
+;; Generalize for the library
+;; (defun ces-seng-new-game (setup systems components)
+;;   (initialized `(ces-seng-systems ,@systems) `(ces-seng-components ,@components) setup))
+;;
+;;
 (defun game ()
    (initialized
     'init-systems

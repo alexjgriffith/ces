@@ -1,6 +1,6 @@
 ;; -*- lexical-binding: t -*-
 
-(defun init-systems ()
+(defun init-systems ()  
   (new-system!
    sample
    (stats pos) (input)
@@ -34,8 +34,10 @@
            (join size where)))
   (new-system!
    viz
-   () (my-location)
-   (render my-location))
+   () (player-location)
+   (let ((rendering (render player-location)))
+     (insert-general-into-generals 'render rendering)
+     (game-debug "%s\n" rendering )))
   (new-system!
    move
    (deer where location) ()
@@ -45,7 +47,7 @@
              (location (cdr x))
              (partners (comp-get-value location 'contains :hash)))
         (mapc (lambda(x)
-                (when (< (random 10) 2)
+                (when (< (random 100) 5)
                   (game-debug "random-move: %s\n" (car x))                  
                   ;;(move-direction-random-internal (car x) loc-id location)
                   (move-direction-random (car x) )

@@ -14,13 +14,17 @@
             (while message
               (let ((uid (car message))
                     (time-sent (cadr message))
-                    (type (caddr message))
-                    (args (cadddr message)))
+                    (type (cadr (cdr message)))
+                    (args (cddr (cdr message))))
                 (when (equal uid 'player)
-                  (insert-general-into-generals type (cons time-sent args)))
+                  (insert-general-into-generals type `(:time ,time-sent
+                                                             :args ,@args))))
                 (setq message (pop mq2))))
-            (setq message-queue nil)))))
+            (setq message-queue nil))))
 
 (defun ces-system-dispatch (state &rest systems)
   (tick state
         (lambda () (mapc 'call-system systems))))
+
+(defun ces-check-general (state general)
+  (tick state (lambda () (generals-f general))))
