@@ -2,8 +2,9 @@
 
 (defvar ces-seng-rend-test-message-list
   `((:body "hello world" :rname "@deer@1" :dname "Deer" :when "now")
-    (:body "hello world" :rname "@deer@1" :dname "Deer" :when "now")
-    (:body ,(propertize "hello world" 'face 'default)
+    (:body "A deer has entered the dell." :rname "@deer@1.loc1" :dname "Deer" :when "now")
+    (:body "A deer makes a deer sound."
+           :entity-id 10
            :rname  "@deer@1.loc1" 
            :link-info '(details :rname "@deer@1.loc1" :dname "Deer"
                                 :description "A furry deer friend. Both loveable and delicous; the best combination."
@@ -70,5 +71,6 @@
 
 (insert (ces-seng-create-message (car ces-seng-test-message-alist)))
 
+(ces-seng-rend-render-message (elt ces-seng-rend-test-message-list 1) "*temp*")
 (ces-seng-rend-render-message (elt ces-seng-rend-test-message-list 2) "*temp*")
 
