@@ -1,0 +1,26 @@
+glen> ls
+player cottage
+geln> dir
+forest-glen-0 :north :cottage
+glen> cd :cottage
+glen> ls
+player
+glen> cat player
+((player)(where :location 2)(stats :str 7 :dex 7 :con 7 :weight 80)
+(inventory
+:hash #s(hash-table size 65 eql rehash-size 1.5 rehash-threshold 0.8125 data ())))
+glen> cat player | agrep stats
+stats :str 7 :dex 7 :con 7 :weight 80
+glen> cd :door
+glen> cd :north
+glen> ls
+player tomato(x3) weed(x7) shed
+glen> pick weed
+glen> pick weed
+glen> pick weed
+glen> ls
+player tomato(x3) weed(x4) shed
+glen> cat player | agrep inventory | hash-to-alist
+((19 . t) (20 . t) (30 . t))
+glen> cat player | view inventory
+weed (x3)

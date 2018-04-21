@@ -1,9 +1,31 @@
-;; -*- lexical-binding: t -*-
+;;; ces-utils.el --- Emacs Game Engine Utilities -*- lexical-binding: t -*-
 
-;; Utilities
+;; Copyright (C) 2018 Alexander Griffith
+;; Author: Alexander Griffith <griffitaj@gmail.com>
+;; Version: 0.1.0
+;; Package-Requires: ((emacs "25.1"))
+;; Homepage: https://github.com/alexjgriffith/ces.el
 
-;; Some of these need to be put in a library
+;; This file is not part of GNU Emacs.
 
+;; This file is part of ces.el.
+
+;; ces.el is free software: you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; ces.el is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with ces.el.  If not, see <http://www.gnu.org/licenses/>.
+
+;;; Commentary:
+
+;;; Code:
 (defun ces-utils-comp-get-value (comps component-name key)
   (plist-get (cdr (assoc component-name comps)) key))
 
@@ -62,3 +84,6 @@
 
 (defun ces-utils-roll-d20 ()
   (random 20))
+
+(provide 'ces-utils)
+;;; ces-utils.el ends here

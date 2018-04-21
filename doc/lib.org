@@ -1,0 +1,32 @@
+* Functions
+** Library
+*** story-game-new-insert
+
+*** story-game-new
+
+*** story-game-add-global
+
+*** ces-set-from-list
+
+*** ces-seng-timer-gen
+
+** Game
+*** new-weed
+
+*** new-rat
+
+*** new-tomato-plant
+
+*** new-tomato
+
+*** stage-timer
+
+*** produce-timer
+
+*** move-timer
+
+* Globals
+** rat-likes
+** rat-dislikes
+** tomato-plant-likes
+** tomato-plant-dislikes

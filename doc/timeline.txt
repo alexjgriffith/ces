@@ -1,0 +1,63 @@
+You look arround. The forest glen looks a little scary.
+There is a cottage a little ways off.
+| Glen (@player@forest-glen-0.0) 2 min ago
+
+You are situated ina gloomy glen, its dark. There is an exit
+to the :north towards a field and to the :cottage towards a
+cottage.
+| Glen (@player@forest-glen-0.0) 2 min ago
+
+You start moving towards the :cottage.
+| Glen (@player@forest-glen-0.0) 2 min ago
+
+You enter the cottage. It looks a little run down but the
+timber frame still stands strong.
+| Glen (@player@cottage-0.0) 2 min ago
+
+A rat scurries out of the cottage.
+| Rat (@rat@cottage-0.3) 2 min ago
+
+You look around the cottage and see nothing.
+| Glen (@player@cottage-0.0) 2 min ago
+
+You pull out a mirror and take a look at yourself.
+| Glen (@player@cottage-0.0) 2 min ago
+
+You pull out a mirror and take a look at yourself.
+| Glen (@player@cottage-0.0) 2 min ago
+
+You start moving towards the door.
+| Glen (@player@cottage-0.0) 2 min ago
+
+You enter a forest glen. The forest glen looks a little
+scary. There is a cottage a little ways off.
+| Glen (@player@forest-glen-0.0) 1 min ago
+
+You start moving towards the :north
+| Glen (@player@forest-glen-0.0) 1 min ago
+
+You enter a feild. It looks abandoned.
+There are tomoato(s) and weed(s).
+| Glen (@player@feild-0.0) 1 min ago
+
+You look around the field and see tomato(s) and weed(s).
+| Glen (@player@feild-0.0) 1 min ago
+
+You pick a weed.
+| Glen (@player@feild-0.0) 1 min ago
+
+You pick a weed.
+| Glen (@player@feild-0.0) 30s ago
+
+You pick a weed.
+| Glen (@player@feild-0.0) 30s ago
+
+You look around the field and see tomato(s) and weed(s).
+| Glen (@player@feild-0.0) 30s ago
+
+You pull out a mirror and look at yourself.
+| Glen (@player@feild-0.0) now
+
+You pull out a mirror and look at yourself.
+| Glen (@player@feild-0.0) now
+

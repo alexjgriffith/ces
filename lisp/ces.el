@@ -27,50 +27,52 @@
 
 ;;; Code:
 
-(defun make-set ()
+(require 'subr-x)
+
+(defun ces-make-set ()
   (make-hash-table))
 
-(defun set-set (element set)
+(defun ces-set-set (element set)
   (puthash element t set))
 
-(defun set-get (element set)
+(defun ces-set-get (element set)
   (gethash element set nil))
 
 (defun set-rem (element set)
   (remhash element set))
 
-(defun set-to-list (set)
+(defun ces-set-to-list (set)
   (hash-table-keys set))
 
-(defun copy-set (set)
+(defun ces-copy-set (set)
   (copy-hash-table set))
 
-(defun set-from-list (list)
-  (let ((set (make-set)))
-    (mapc (lambda(x) (set-set x set)) list)
+(defun ces-set-from-list (list)
+  (let ((set (ces-make-set)))
+    (mapc (lambda(x) (ces-set-set x set)) list)
     set))
 
-(defun set-intersect-2 (seta setb)
+(defun ces-set-intersect-2 (seta setb)
   (let* ((keys (hash-table-keys seta))
-         (setc (copy-set seta)))
+         (setc (ces-copy-set seta)))
     (mapc (lambda(key) (unless (set-get key setb)
-                         (set-rem key setc)))
+                         (ces-set-rem key setc)))
                 keys)
     setc))
 
-(defun set-intersect (&rest sets)
-  (cond ((equal (length sets) 0) (make-set))
+(defun ces-set-intersect (&rest sets)
+  (cond ((equal (length sets) 0) (ces-make-set))
          ((equal (length sets) 1) (car sets))
          ((equal (length sets) 2) (set-intersect-2 (car sets) (cadr sets)))
-         (t (fold 'set-intersect-2  (car sets) (cadr sets) (cddr sets)))))
+         (t (ces-fold 'ces-set-intersect-2  (car sets) (cadr sets) (cddr sets)))))
 
-(defun fold (fun initial arg1 args)
+(defun ces-fold (fun initial arg1 args)
   (while arg1
     (setq initial (funcall fun arg1 initial))
     (setq arg1 (pop args)))
   initial)
 
-(defun zip2 (lista listb)
+(defun ces-zip2 (lista listb)
   (let ((elema (pop lista))
         (elemb (pop listb))
         ret)
@@ -80,7 +82,7 @@
       (setq elemb (pop listb)))
     (reverse ret)))
 
-(defun zip2-cons (lista listb)
+(defun ces-zip2-cons (lista listb)
   (let ((elema (pop lista))
         (elemb (pop listb))
         ret)
@@ -90,27 +92,27 @@
       (setq elemb (pop listb)))
     (reverse ret)))
 
-(defun insert-into-hash-set (index value hash)
+(defun ces-insert-into-hash-set (index value hash)
   (let ((selection (gethash index hash)))
     (unless selection
       (setq selection (make-set)))
-    (set-set value selection)
+    (ces-set-set value selection)
     (puthash index selection hash)))
 
-(defun remove-from-hash-set (index value hash)
+(defun ces-remove-from-hash-set (index value hash)
   (let* ((selection (gethash index hash)))
-    (set-rem  value selection)
+    (ces-set-rem  value selection)
     (puthash index  selection hash)))
 
-(defun insert-into-hash-list (index value hash)
+(defun ces-insert-into-hash-list (index value hash)
   (puthash index (append (gethash index hash) (list value)) hash))
 
-(defun remove-from-hash-list (index value hash)
+(defun ces-remove-from-hash-list (index value hash)
   (let* ((sub-hash (gethash index hash)))
     (puthash index (remove  value sub-hash) hash)))
 
-(defun new-entity (moniker &rest components)
-  (let ((id (insert-entity-into-entities moniker)))
+(defun ces-new-entity (moniker &rest components)
+  (let ((id (ces-insert-entity-into-entities moniker)))
     (when components (add-components id components))
     id))
 
@@ -128,7 +130,7 @@
       (setq key (+ key 1))
       (- key 1))))
 
-(defun init-globs ()
+(defun ces-init-globs ()
   (setq c2e (make-hash-table))
   (setq e2c (make-hash-table))
   (setq generals (make-hash-table))
@@ -140,125 +142,125 @@
   (setq entities (make-hash-table))
   (setq message-queue '()))
 
-(defun initialized (init-systems init-components setup)
+(defun ces-initialized (init-systems init-components setup)
   (let (c2e e2c components entities generals components-def systems-def
             c-insert e-insert message-queue)
-    (init-globs)
+    (ces-init-globs)
     (mapc 'funcall init-systems)
     (mapc 'funcall init-components)
     (funcall setup)
     (list :c2e c2e :e2c e2c :components components :entities entities
           :generals generals :components-def components-def :systems-def systems-def)))
 
-(defun insert-component-into-components (value)
+(defun ces-insert-component-into-components (value)
   (funcall c-insert value))
 
-(defun remove-component-from-components (key)
+(defun ces-remove-component-from-components (key)
   (remhash key components))
 
-(defun insert-entity-into-entities (value)
+(defun ces-insert-entity-into-entities (value)
   (funcall e-insert value))
 
-(defun get-entity-from-entities (key)
+(defun ces-get-entity-from-entities (key)
   (gethash key entities))
 
-(defun remove-entity-from-entities (key)
+(defun ces-remove-entity-from-entities (key)
   (remhash key entities))
 
-(defun insert-component-into-e2c (e-id which)
-  (insert-into-hash-list e-id which e2c))
+(defun ces-insert-component-into-e2c (e-id which)
+  (ces-insert-into-hash-list e-id which e2c))
 
-(defun remove-component-from-e2c (e-id c-id)
-  (remove-from-hash-list e-id  c-id  e2c))
+(defun ces-remove-component-from-e2c (e-id c-id)
+  (ces-remove-from-hash-list e-id  c-id  e2c))
 
-(defun remove-entity-from-e2c (e-id)
+(defun ces-remove-entity-from-e2c (e-id)
   (remhash e-id e2c))
 
-(defun insert-entity-into-c2e (e-id c-id)
-  (insert-into-hash-set c-id e-id c2e))
+(defun ces-insert-entity-into-c2e (e-id c-id)
+  (ces-insert-into-hash-set c-id e-id c2e))
 
-(defun remove-entity-from-c2e (e-id c-id)
-  (remove-from-hash-set c-id  e-id  c2e))
+(defun ces-remove-entity-from-c2e (e-id c-id)
+  (ces-remove-from-hash-set c-id  e-id  c2e))
 
-(defun insert-general-into-generals (key value)
+(defun ces-insert-general-into-generals (key value)
   (puthash key value generals))
 
-(defun remove-general-from-generals (key)
+(defun ces-remove-general-from-generals (key)
   (remhash key generals))
 
 
-(defun add-component (id component)
+(defun ces-add-component (id component)
   (let* ((component-name (car component))
          (component-value (cdr component))
          (which (insert-component-into-components component)))
-    (insert-component-into-e2c id which)
-    (insert-entity-into-c2e id component-name)))
+    (ces-insert-component-into-e2c id which)
+    (ces-insert-entity-into-c2e id component-name)))
 
-(defun add-components (player-id &rest components)
+(defun ces-add-components (player-id &rest components)
   (when components
-    (mapc (lambda(comp) (add-component player-id comp)) components))
+    (mapc (lambda(comp) (ces-add-component player-id comp)) components))
   player-id)
 
-(defun remove-component-from-entity (entity-id component)
+(defun ces-remove-component-from-entity (entity-id component)
   (mapc (lambda(x )
           (when (equal component (car(gethash x components)))
             (remhash x components)
-            (remove-component-from-e2c entity-id x)
-            (remove-entity-from-c2e entity-id component)))
+            (ces-remove-component-from-e2c entity-id x)
+            (ces-remove-entity-from-c2e entity-id component)))
         (gethash entity-id e2c)))
 
-(defun remove-entity (entity-id)
+(defun ces-remove-entity (entity-id)
   (let ((comp-ids (e2c-f entity-id)))
-    (remove-entity-from-entities entity-id)
-    (mapc (lambda (comp) (remove-entity-from-c2e entity-id (car  comp)))
+    (ces-remove-entity-from-entities entity-id)
+    (mapc (lambda (comp) (ces-remove-entity-from-c2e entity-id (car  comp)))
           (components-f comp-ids))
-    (mapc (lambda (comp-id) (remove-component-from-components comp-id))
+    (mapc (lambda (comp-id) (ces-remove-component-from-components comp-id))
           comp-ids) 
-    (remove-entity-from-e2c entity-id)))
+    (ces-remove-entity-from-e2c entity-id)))
 
-(defun entity-keys()
+(defun ces-entity-keys()
   (hash-table-keys entities))
 
-(defun components-f (comp-list)
+(defun ces-components-f (comp-list)
   (mapcar (lambda (index) (gethash index components)) comp-list))
 
-(defun entities-f (ent-list)
+(defun ces-entities-f (ent-list)
   (mapcar (lambda (index) (gethash index entities)) ent-list))
 
-(defun generals-f (name)
+(defun ces-generals-f (name)
   (gethash name generals))
 
-(defun e2c-f (entity)
+(defun ces-e2c-f (entity)
   (gethash entity e2c))
 
-(defun c2e-f (component)
+(defun ces-c2e-f (component)
   (gethash component c2e))
 
-(defmacro new-component! (name &rest elements)
+(defmacro ces-new-component! (name &rest elements)
   `(puthash ',name (lambda(,@elements)
                      (apply 'append '(,name) (zip2 (quote ,elements)
                                                    (list ,@elements) )))
             components-def))
 
-(defmacro new-system! (name comps gens &rest body)
+(defmacro ces-new-system! (name comps gens &rest body)
   `(puthash ',name
             (lambda ()
-              (let ,(append (mapcar (lambda (x) `(,x (c2e-f ',x))) comps)
-                            (mapcar (lambda (x) `(,x (generals-f ',x))) gens))
+              (let ,(append (mapcar (lambda (x) `(,x (ces-c2e-f ',x))) comps)
+                            (mapcar (lambda (x) `(,x (ces-generals-f ',x))) gens))
                 ,@body))
             systems-def))
 
-(defun call-system (system)
+(defun ces-call-system (system)
   (funcall (gethash system systems-def)))
 
-(defun gen-component (comp &rest cargs)
+(defun ces-gen-component (comp &rest cargs)
   (apply (gethash comp components-def) cargs))
 
-(defun join (&rest sets)
-  (mapcar (lambda (ent) (cons ent (components-f (e2c-f ent))))
-          (set-to-list (apply 'set-intersect sets))))
+(defun ces-join (&rest sets)
+  (mapcar (lambda (ent) (cons ent (ces-components-f (ces-e2c-f ent))))
+          (set-to-list (apply 'ces-set-intersect sets))))
 
-(defun tick (state callback)
+(defun ces-tick (state callback)
   (let ((c2e (plist-get state :c2e))
         (e2c (plist-get state :e2c))
         (components (plist-get state :components))
@@ -273,11 +275,11 @@
 (defun ces-serialize-human-callback ()
   (mapcar
        (lambda (ent-id)
-         (let ((comp-ids (e2c-f ent-id)))
+         (let ((comp-ids (ces-e2c-f ent-id)))
            `(,ent-id
-             ,(get-entity-from-entities ent-id)
-             ,(zip2-cons comp-ids (components-f comp-ids)))))
-       (entity-keys) ))
+             ,(ces-get-entity-from-entities ent-id)
+             ,(ces-zip2-cons comp-ids (ces-components-f comp-ids)))))
+       (ces-entity-keys) ))
 
 (defun ces-serialize-human (world buffer)
   (with-current-buffer (get-buffer-create buffer)
@@ -296,10 +298,10 @@
        (lambda (entity)
          (let ((ent-id (car entity))
                (moniker (cadr entity))
-               (c-ids (mapcar 'insert-component-struct-into-components
+               (c-ids (mapcar 'ces-insert-component-struct-into-components
                                    (caddr entity))))
-           (new-entity-with-instantiated-components
-            ent-id moniker c-ids (mapcar 'car (components-f c-ids)))))
+           (ces-new-entity-with-instantiated-components
+            ent-id moniker c-ids (mapcar 'car (ces-components-f c-ids)))))
        data))))
 
 (defun ces-set-c&e-insert ()
@@ -308,28 +310,28 @@
   (setq c-insert (ces-insert-component-bld
                   (+ 1 (apply 'max (hash-table-keys components))))))
 
-(defun insert-component-struct-into-components (cstruct)
+(defun ces-insert-component-struct-into-components (cstruct)
   (let ((c-id (car cstruct))
         (component (cdr cstruct)))
     (puthash c-id component components)
     c-id))
 
-(defun new-entity-with-instantiated-components (ent-id moniker c-ids cnames)
+(defun ces-new-entity-with-instantiated-components (ent-id moniker c-ids cnames)
   (puthash ent-id moniker entities)
   (mapc (lambda(c-id)
-          (insert-component-into-e2c ent-id c-id))
+          (ces-insert-component-into-e2c ent-id c-id))
         c-ids)
   (mapc (lambda (cname)
-          (insert-entity-into-c2e ent-id cname))
+          (ces-insert-entity-into-c2e ent-id cname))
         cnames)        
   ent-id)
 
-(defun initialize-from-human-seraialized (init-systems init-components buffer)
+(defun ces-initialize-from-human-seraialized (init-systems init-components buffer)
   (let (c2e e2c components entities generals components-def systems-def
             c-insert e-insert)
-    (init-globs)
-    (funcall init-systems)
-    (funcall init-components)
+    (ces-init-globs)
+    (apply 'funcaall init-systems)
+    (apply 'fncall funcall init-components)
     (ces-deserialize-human buffer)
     (ces-set-c&e-insert)
     (list :c2e c2e :e2c e2c :components components :entities entities
@@ -337,6 +339,33 @@
 
 (defun ces-call-function (state fun)
   (tick state (lambda () (funcall fun))))
+
+(defun ces-event-send-message (state type &rest cargs)
+  (tick state (lambda() (push (list 'player (float-time) type cargs)
+                              message-queue))))
+
+(defun ces-event-poll (state)
+  (tick state
+        (lambda ()
+          (let* ((mq2 (reverse message-queue))
+                 (message (pop mq2)))
+            (while message
+              (let ((uid (car message))
+                    (time-sent (cadr message))
+                    (type (cadr (cdr message)))
+                    (args (cddr (cdr message))))
+                (when (equal uid 'player)
+                  (ces-insert-general-into-generals type `(:time ,time-sent
+                                                             :args ,@args))))
+                (setq message (pop mq2))))
+            (setq message-queue nil))))
+
+(defun ces-system-dispatch (state &rest systems)
+  (tick state
+        (lambda () (mapc 'ces-call-system systems))))
+
+(defun ces-check-general (state general)
+  (tick state (lambda () (ces-generals-f general))))
 
 (provide 'ces)
 ;;; ces.el ends here

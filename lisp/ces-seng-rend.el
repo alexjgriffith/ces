@@ -1,4 +1,32 @@
-;;; -*- lexical-binding: t -*-
+;;; ces-seng-reng.el --- Emacs Story Engine -*- lexical-binding: t -*-
+
+;; Copyright (C) 2018 Alexander Griffith
+;; Author: Alexander Griffith <griffitaj@gmail.com>
+;; Version: 0.1.0
+;; Package-Requires: ((emacs "25.1"))
+;; Homepage: https://github.com/alexjgriffith/ces.el
+
+;; This file is not part of GNU Emacs.
+
+;; This file is part of ces.el.
+
+;; ces.el is free software: you can redistribute it and/or modify
+;; it under the terms of the GNU General Public License as published by
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
+
+;; ces.el is distributed in the hope that it will be useful,
+;; but WITHOUT ANY WARRANTY; without even the implied warranty of
+;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+;; GNU General Public License for more details.
+
+;; You should have received a copy of the GNU General Public License
+;; along with ces.el.  If not, see <http://www.gnu.org/licenses/>.
+
+;;; Commentary:
+
+;;; Code:
+
 
 (defvar ces-seng-rend-test-message-list
   `((:body "hello world" :rname "@deer@1" :dname "Deer" :when "now")
@@ -69,8 +97,11 @@
       (insert (propertize (ces-seng-rend-create-message message)
                           'message-buffer message-buffer)))))
 
-(insert (ces-seng-create-message (car ces-seng-test-message-alist)))
+;; (insert (ces-seng-create-message (car ces-seng-test-message-alist)))
 
-(ces-seng-rend-render-message (elt ces-seng-rend-test-message-list 1) "*temp*")
-(ces-seng-rend-render-message (elt ces-seng-rend-test-message-list 2) "*temp*")
+;; (ces-seng-rend-render-message (elt ces-seng-rend-test-message-list 1) "*temp*")
 
+;; (ces-seng-rend-render-message (elt ces-seng-rend-test-message-list 2) "*temp*")
+
+(provide 'ces-seng-reng)
+;;; ces-seng-reng.el ends here
