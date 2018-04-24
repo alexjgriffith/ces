@@ -1,14 +1,59 @@
 * Functions
-** Library
+  This is not an exaustive list of the functions in the ces and seng. Rather, its a summary of key functions needed for when developing the initial state of the game.
+** Library API
 *** story-game-new-insert
+    Create a new object. Insert the resulting data structure in write-format into the load-in list
+
+#+BEGIN_SRC emacs-lisp
+  (defun story-game-new-insert (obj-type &rest keyword-arguments)
+    ;; Create a temporary world with all components predefined (no systems needed)
+    ;; Add a new entity to that world with the appropriate new obj fun
+    ;; export and return that object as a read-human
+    ;; Note the location must already know that this entity is contained within it!!
+    (let* ((world (story-game-temp-world))
+           (ent-id (apply (assoc obj-type story-game-new-objs) world keyword-arguments)))
+      (ces-human-readable world ent-id)))
+#+END_SRC
 
 *** story-game-new
+    Creates a new object. Rather than inserting the components directly into the load-in list it returns the ent-id handle. The generated ent-ids by default start at 10,000 but this can be adjusted if need be.
 
+#+BEGIN_SRC emacs-lisp
+  (defun story-game-new (obj-type &rest keyword-arguments)
+    ;; Inserts the new object directly into the world ces that is available within
+    ;; the loader closure.
+    ;; returns the entity id
+    (apply (assoc obj-type story-game-new-objs) loader-world keyword-arguments)) 
+#+END_SRC
+    Note that the new-objs function will add a gen-timer to a list of timers that are to be added to the appropriate locations. This is true for story-game-new and story-game-new-insert. Takeaway DONT ADD TIMERS MANUALLY!!
 *** story-game-add-global
+    Add a global to the load-in list. Globals are loaded into the loader before the load-in list is parsed. They are available as variables within a closure.
 
+#+BEGIN_SRC emacs-lisp
+  (defun story-game-add-global (key)
+    (gethash game-global key))
+#+END_SRC    
+  
 *** ces-set-from-list
-
+    a standard functiondefined in ces.el
+  
 *** ces-seng-timer-gen
+    - The timer functionality still has to be fully flushed out.
+    - The structure will look something like this
+    - In order to be able to pause and start the game the timer has to 
+      be able to be set and reset with the an adjusted duration
+#+BEGIN_SRC emacs-lisp
+  (timer :start :end :duration :callback :cargs)
+#+END_SRC    
+When the game is paused / saved the durration is adjusted to be start-end. When it is loaded again the start for all timers is set to the start time and the end is set to start + duration.
+
+Gen timer has to take into account the type of timer that is being produced and the entity that it is being preformed on. This may be dificult since durring the load in the entity will not have been defined yet.
+
+#+BEGIN_SRC emacs-lisp
+  (defun ces-seng-timer-gen (type ent)
+    (let ((gen-fun (assoc type timer-gen-funs)))
+      (funcall gen-fun ent)))
+#+END_SRC    
 
 ** Game
 *** new-weed
@@ -20,6 +65,13 @@
 *** new-tomato
 
 *** stage-timer
+#+BEGIN_SRC emacs-lisp
+  (defun ces-seng-timer-gen (ent-with-stage)
+    (let ((loc-id (ces-seng-ent-loc ent-with-stage))
+          (stage (ces-utils-comp-get-plist ent-with-stage )))
+      (funcall gen-fun ent)))
+#+END_SRC    
+
 
 *** produce-timer
 
@@ -30,3 +82,33 @@
 ** rat-dislikes
 ** tomato-plant-likes
 ** tomato-plant-dislikes
+
+* Thoughts
+How to read and evaluate a subsection of a buffer
+
+#+BEGIN_SRC emacs-lisp
+  (defun test-load-eval (buffer)
+    (with-current-buffer (get-buffer buffer)
+      (save-excursion
+        (goto-char (point-min))
+        (let* ((start (re-search-forward "^;;\\+start"))
+               (end (progn
+                      (re-search-forward "^;;\\+end")
+                      (re-search-backward "^")))
+               (str (buffer-substring start end)))                
+          
+          (let ((data (read-from-whole-string str)))
+                (eval data)
+            )))))
+
+  (test-load-eval (current-buffer))
+
+;;+start
+  `(1 2 3 ,(mapcar (lambda(x) (+ x 1)) '(1 2 3)))
+;;+end
+
+#+END_SRC
+
+
+
+

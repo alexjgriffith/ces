@@ -35,7 +35,7 @@
      (attributes :hash ,(ces-set-from-list '(indoors cottage poor-repair)))
      (description :text "It looks a little run down but the timber frame still stands strong.")
      (move :modifier 1.0 )
-     (contains :hash #s(hash-table data (257 t))) ;; rats
+     (contains :hash #s(hash-table data (257 t 258 5 259 t))) ;; rats
      (exits :hash #s(hash-table data (:door 1)))
      (location :timer #s(hash-table)))
   (3 "location field-0"
@@ -60,8 +60,7 @@
                                              ,(story-game-new 'weed :where 3) t
                                          )))
      (exits :hash #s(hash-table data (:south 1)))
-     (location :timer #s(hash-table data (,@(ces-seng-timer-gen 'produce 259)
-                                          ,@(ces-seng-timer-gen 'stage 259)))))
+     (location :timer #s(hash-table data ())))
   ;; Object codes, other than player start at 257 and end by 2049, this is an arbitrary end point
   (256 "rat"
        (name :obj-name rat :display-name "Rat" :short-name "Rat")
@@ -78,8 +77,8 @@
                          :exit-start "the rat scurries towards"
                          :exit-start "the rat has left the"
                          :into-start "the rat scurries towards"))
-  (257 ,(story-game-new-insert 'rat 2 :contains 'rat-meat))
-  (258 ,(story-game-new-insert 'rat 2 :contains 'rat-meat))
+  (257 ,(story-game-new-insert 'rat  :contains 'rat-meat))
+  (258 ,(story-game-new-insert 'rat  :contains 'rat-meat))
   (259 "tomato plant"
        (name :obj-name tomato-plant :display-name "Tomato plant" :short-name "tomato-p")
        (description :text "A tomato plant. Has 3 growth stages. Once harvested it will contiue to produce tomatoes untill the end of the season")
