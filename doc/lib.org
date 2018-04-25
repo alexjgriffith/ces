@@ -56,6 +56,14 @@ Gen timer has to take into account the type of timer that is being produced and 
 #+END_SRC    
 
 ** Game
+make the generation of new object types into a macro.
+1. object-name 2-n: (component-name default default default)
+#+BEGIN_SRC elisp
+(defmacro ces-seng-entity-type (name &rest components)
+""
+`(defun ,(format "ces-seng-macro-new-%s" name) (ces-c))
+)
+#+END_SRC
 *** new-weed
 
 *** new-rat
