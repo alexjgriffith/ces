@@ -85,5 +85,10 @@
 (defun ces-utils-roll-d20 ()
   (random 20))
 
+(defun ces-utils-hash-from-alist (alist)
+  (let ((hash (makehash equal)))
+    (mapc (lambda(x) (puthash (car x) (cdr x) hash)) alist)
+    hash))
+
 (provide 'ces-utils)
 ;;; ces-utils.el ends here

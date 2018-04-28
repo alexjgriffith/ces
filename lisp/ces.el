@@ -95,7 +95,7 @@
 (defun ces-insert-into-hash-set (index value hash)
   (let ((selection (gethash index hash)))
     (unless selection
-      (setq selection (make-set)))
+      (setq selection (ces-make-set)))
     (ces-set-set value selection)
     (puthash index selection hash)))
 
@@ -330,7 +330,7 @@
   (let (c2e e2c components entities generals components-def systems-def
             c-insert e-insert)
     (ces-init-globs)
-    (apply 'funcaall init-systems)
+    (apply 'funcall init-systems)
     (apply 'fncall funcall init-components)
     (ces-deserialize-human buffer)
     (ces-set-c&e-insert)
