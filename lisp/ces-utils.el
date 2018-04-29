@@ -26,11 +26,26 @@
 ;;; Commentary:
 
 ;;; Code:
+
+(defun ces-utils-comp-get-value-e (ent-id component-name key)
+  (ces-utils-comp-get-value (ces-components-f (ces-e2c-f ent-id))
+                            component-name key))
+
 (defun ces-utils-comp-get-value (comps component-name key)
   (plist-get (cdr (assoc component-name comps)) key))
 
+(defun ces-utils-comp-put-value (comps component-name key value)
+  (plist-put (cdr (assoc component-name comps)) key value))
+
 (defun ces-utils-comp-put-hash-value (comps component-name key hashkey value)
   (puthash hashkey value (plist-get (cdr (assoc component-name comps)) key)))
+
+(defun ces-utils-comp-rem-hash-value (comps component-name key hashkey)
+  (remhash hashkey (plist-get (cdr (assoc component-name comps)) key)))
+
+(defun ces-utils-comp-get-plist-e (ent-id component-name)
+  (ces-utils-comp-get-plist (ces-components-f (ces-e2c-f ent-id))
+                            component-name))
 
 (defun ces-utils-comp-get-plist (components component-name)
   (cdr (assoc component-name components)) )
@@ -89,9 +104,12 @@
   (random 20))
 
 (defun ces-utils-hash-from-alist (alist)
-  (let ((hash (makehash equal)))
+  (let ((hash (make-hash-table :test 'equal)))
     (mapc (lambda(x) (puthash (car x) (cdr x) hash)) alist)
     hash))
 
+(defun ces-utils-set-filter (hash set)
+  (ces-set-intersect-2 hash set))
+ 
 (provide 'ces-utils)
 ;;; ces-utils.el ends here

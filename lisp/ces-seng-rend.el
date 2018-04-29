@@ -48,6 +48,7 @@
 (defvar ces-seng-rend-display-mode-map
   (let ((map (make-sparse-keymap)))
     (define-key map (kbd "q") #'kill-this-buffer)
+    (define-key map (kbd "RET") #'ces-seng-rend-eval-at-point)
     map))
 
 (defun ces-seng-rend-move-to-next-message ()
@@ -99,9 +100,9 @@
   (let ((message-buffer "*ces-seng-rend-test*"))
    (with-current-buffer (get-buffer-create message-buffer)
     (ces-seng-rend-mode)   
-    (ces-seng-rend-render-message (elt ces-seng-rend-test-message-list 0) message-buffer)
-    (ces-seng-rend-render-message (elt ces-seng-rend-test-message-list 1) message-buffer)
-    (ces-seng-rend-render-message (elt ces-seng-rend-test-message-list 2) message-buffer)
+    (ces-seng-rend-render-message (elt ces-seng-rend-test-message-list 0) message-buffer :test)
+    (ces-seng-rend-render-message (elt ces-seng-rend-test-message-list 1) message-buffer :test)
+    (ces-seng-rend-render-message (elt ces-seng-rend-test-message-list 2) message-buffer :test)
     (switch-to-buffer-other-window (current-buffer)))))
 
 ;; 'font-lock-builtin-face
@@ -111,42 +112,112 @@
 
 ;; (cdr (assoc ent-id ces-seng-rend-test-entities-alist))
 
+(defun ces-seng-rend-entity-wearing (ent-id name)
+  (when ent-id
+    (concat (format "%s - " name)
+            (ces-seng-rend-create-linkable
+             (propertize 
+              (ces-utils-comp-get-value-e
+               ent-id 'named :dname)
+              'face font-lock-variable-name-face)
+             ent-id)
+            " ")))
+
+(defun ces-seng-rend-entity-attributes (hash)
+  (when hash
+    (let (text)
+      (maphash (lambda (key _value)
+                 (if text
+                     (setq text (concat text " - " key))
+                   (setq text key)
+                   ))
+               hash)
+      (concat "\n\n"
+              (propertize "Attributes" 'face font-lock-builtin-face)
+              "\n============\n" text))))
+
 ;; this function and below has to be cleaned up to handle the ces
-(defun ces-seng-rend-entity (ent-id &optional components)
-  (let* ((components (or components (ces-components-f (ces-e2c-f ent-id))))
-         (named (ces-utils-comp-get-plist components 'named))
+(defun ces-seng-rend-entity (ent-id &optional comps)
+  (let* ((comps (or comps (ces-components-f (ces-e2c-f ent-id))))
+         (named (ces-utils-comp-get-plist comps 'named))
+         (description (ces-utils-comp-get-plist comps 'description))
+         (equipment (ces-utils-comp-get-plist comps 'equipment))
+         (doing (ces-utils-comp-get-value comps 'doing :text))
          (dname (plist-get named :dname))
          (rname (plist-get named :rname))
          (pronoun (plist-get named :pronoun))
-         (description (plist-get named :description))
-         (hash (ces-utils-comp-get-value components 'likes :hash))
+         (description (plist-get description :text))
+         (hash (ces-utils-comp-get-value comps 'preferences :hash))
+         (interactions (ces-utils-comp-get-value comps 'interactions :hash))
+         (attribs (ces-utils-comp-get-value comps 'attributes :hash))
+         (interaction-text "")
          likes dislikes)
-    (maphash (lambda(key value) (if (> value 0) (push key likes) (push key dislikes)))
-             hash)
+    (when (hash-table-p interactions)
+      (maphash (lambda (name desc) (setq interaction-text
+                                         (concat interaction-text "\n"
+                                                 name ": " desc)))
+               interactions))
+    (when hash
+      (maphash (lambda(key value) (if (> value 0) (push key likes) (push key dislikes)))
+             hash))
     ;;(nreverse likes)
     ;;(nreverse dislikes)
-    (message "likes: %s" likes)
+    ;; (message "likes: %s" likes)
     (propertize
-     (concat (propertize dname 'face 'warning)
-             " ("
-             (propertize rname 'face 'font-lock-string-face)
-             ")\n============\n\n"
-             (propertize description 'face font-lock-builtin-face)
-             (format "\n%s likes " pronoun)
-             (mapconcat (lambda (str) (propertize str 'face font-lock-keyword-face))
-                        (cdr likes) ", ")
-             " & "
-             (propertize (car likes) 'face  font-lock-keyword-face)
-             "."
-             (format "\n%s dislikes " pronoun)
-             (mapconcat (lambda (str) (propertize str 'face font-lock-keyword-face))
-                        (cdr dislikes) ", ")
-             " & "
-             (propertize (car dislikes) 'face font-lock-keyword-face)
-             ".\n\n"
-             (propertize "Interactions" 'face font-lock-builtin-face)
-             "\n============\n"
-             )
+     (concat (when dname (propertize dname 'face 'warning))
+             (when rname (concat " ("
+                                 (propertize rname 'face 'font-lock-string-face)
+                                 ")"))
+             (when named "\n============\n\n")
+             (when description (propertize description 'face font-lock-builtin-face))
+             "\n"
+             (when (and pronoun equipment)
+               (let ((hat (plist-get equipment :head))
+                     (pants (plist-get equipment :pants))
+                     (shirt (plist-get equipment :shirt))
+                     (shoes (plist-get equipment :shoes))
+                     (hand (plist-get equipment :hand))
+                     (ring (plist-get equipment :ring)))
+                 (ces-tick
+                  story-game-state
+                  (lambda ()
+                  (when (or hat pants shirt)
+                     (concat pronoun " is wearing: "
+                             (ces-seng-rend-entity-wearing hat "hat")
+                             (ces-seng-rend-entity-wearing pants "pants")
+                             (ces-seng-rend-entity-wearing shirt "shirt")
+                             (ces-seng-rend-entity-wearing shoes "shoes")
+                             (ces-seng-rend-entity-wearing ring "ring")
+                             (ces-seng-rend-entity-wearing hand "wielding")
+                             )
+                     
+                     )))))
+             
+             (when doing (concat "\n" doing "\n"))
+             (ces-seng-rend-entity-attributes attribs)
+             (when likes
+               (concat (format "\n%s likes " pronoun)
+                       (mapconcat (lambda (str) (propertize str 'face font-lock-keyword-face))
+                                (cdr likes) ", ")
+                     " & "
+                     (propertize (car likes) 'face  font-lock-keyword-face)
+                     "."))
+             (when dislikes
+               (concat (format "\n%s dislikes " pronoun)
+                       (mapconcat (lambda (str) (propertize str 'face font-lock-keyword-face))
+                                  (cdr dislikes) ", ")
+                       " & "
+                       (propertize (car dislikes) 'face font-lock-keyword-face)
+                       "."))
+             "\n\n"             
+             (when interactions
+               (concat
+                (propertize "Interactions" 'face font-lock-builtin-face)
+                "\n============\n"
+                interaction-text
+                "\n"
+                )
+               ))
      'header-section t)))
 
 (defun ces-seng-rend-display-details (point)
@@ -162,12 +233,26 @@
 
 ;; need to add an 'entity, components and buf-name property to the byline
 
-(defun ces-seng-rend-create-message (message-buffer message)
+(defun ces-seng-rend-create-linkable (str ent-id &optional message-buffer)
+  (let* ((comps (ces-components-f (ces-e2c-f ent-id)))
+        (dname (ces-utils-comp-get-value comps 'named :dname))
+        (rname (ces-utils-comp-get-value comps 'named :rname)))
+    (propertize
+     str
+     'entity ent-id
+     'components comps
+     'rname rname
+     'length (length str)
+     'buf-name (concat (or message-buffer "*ces-seng-rend-test*") "-" rname))))
+
+(defun ces-seng-rend-create-message (message-buffer message &optional testing)
   (let* ((body (plist-get message :body))
          (ent-id (plist-get message :ent-id))
-         (components (cadr (assoc ent-id ces-seng-rend-test-entities-alist)))
-         (dname (ces-utils-comp-get-value components 'named :dname))
-         (rname (ces-utils-comp-get-value components 'named :rname))
+         (comps (if testing
+                         (cadr (assoc ent-id ces-seng-rend-test-entities-alist))
+                       (ces-components-f (ces-e2c-f ent-id))))
+         (dname (ces-utils-comp-get-value comps 'named :dname))
+         (rname (ces-utils-comp-get-value comps 'named :rname))
          (when  (plist-get message :when))         
          (relative-when  (ces-seng-rend-timestamp-relative (plist-get message :when)))
          (str (concat (propertize (concat body "\n") 'body-section t)
@@ -183,18 +268,18 @@
     (propertize
      str
      'entity ent-id
-     'components components
+     'components comps
      'rname rname
      'when when
      'length (length str)
      'buf-name (concat message-buffer "-" rname))))
 
-(defun ces-seng-rend-render-message(message message-buffer)
+(defun ces-seng-rend-render-message(message message-buffer &optional testing)
   (with-current-buffer (get-buffer-create message-buffer)
     (save-excursion
       (goto-char (point-min))
       (let ((inhibit-read-only t)            
-            (str (ces-seng-rend-create-message message-buffer message)))
+            (str (ces-seng-rend-create-message message-buffer message testing)))
         (insert str)))))
 
 (defmacro ces-seng-rend-timestamp-make-to-string-alist (seconds-per-hour)

@@ -49,7 +49,7 @@
            ent-id moniker c-ids (mapcar 'car (ces-components-f c-ids)))))
      data)))
 
-(defun ces-loader (init-systems init-components game-loader buffers)
+(defun ces-loader (init-systems init-components game-loader buffers gen)
   (let (c2e e2c components entities generals components-def systems-def
             c-insert e-insert)
     (ces-init-globs)
@@ -57,6 +57,9 @@
     (apply 'funcall init-components)
     (ces-set-c&e-insert)    
     (apply game-loader buffers)
+    (mapc (lambda(x)
+            (ces-insert-general-into-generals (car x) (cdr x)))
+          gen)
     (list :c2e c2e :e2c e2c :components components :entities entities
      :generals generals :components-def components-def :systems-def systems-def)))
 

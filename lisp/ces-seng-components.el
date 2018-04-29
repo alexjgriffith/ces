@@ -1,9 +1,9 @@
 ;; -*- lexical-binding: t -*-
 
-(defun ces-seng-components ()
-  (ces-new-component! task-timer :task :args :start :end :duration)
-  (ces-new-component! task :start-text :completion-text :abort-text
-                      :hours :function)
+(defun ces-seng-components ()  
+  (ces-new-component! task :task :args :start-text :abort-text :end-text
+                      :start :end :duration)
+  (ces-new-component! timer :hash)
   (ces-new-component! location)
   (ces-new-component! player)
   (ces-new-component! where :location)
@@ -14,4 +14,9 @@
   (ces-new-component! exits :hash)
   (ces-new-component! timers :hash)
   (ces-new-component! description :text)
-  (ces-new-component! contains :hash))
+  (ces-new-component! doing :text :keywords)
+  (ces-new-component! contains :hash)
+  (ces-new-component! preferences :hash)
+  (ces-new-component! favour :level :description-hash)
+  (ces-new-component! equipment :head :shirt :pants :shoes :ring :hand)
+  (ces-new-component! interactions :hash))
