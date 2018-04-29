@@ -1,7 +1,12 @@
+;; -*- lexical-binding :t -*-
+;;(mapc 'load-file (directory-files "~/Development/elisp/ces/lisp/" t ".el"))
+
 (mapc 'load-file (directory-files "~/Development/elisp/ces/lisp/" t ".el"))
 
-(setq lexical-binding t)
 
+;;(setq lexical-binding t)
+
+(setq debug-on-error t)
 
 ;; this is getting very compicated
 (defvar story-game-ids #s(hash-table test equal data ("animals" 1024
@@ -11,6 +16,20 @@
 (defvar story-game-loader-location-alist nil)
 
 (defvar story-game-standard-init #s(hash-table data (rat story-game-init-rat)))
+
+(defvar story-game-state
+  (ces-loader '(ces-seng-systems) '(ces-seng-components)
+              'story-game-loader '("game-mid.el")))
+
+
+(defun story-game-loader (buffer)
+                   (let  ((story-game-loader-location-alist nil))
+                     (ces-loader-load buffer)
+                     (mapc (lambda (ent-loc)
+                             (let ((ent (car ent-loc))
+                                   (loc (cdr ent-loc)))
+                               (ces-seng-utils-add-ent-to-location ent loc)))
+                           story-game-loader-location-alist)))
 
 (defun story-game-next-id (key)
   (let ((value (gethash key story-game-ids)))
@@ -27,8 +46,6 @@
                                                      id))
                 `(description :text ,"A furry little rat buddy. Great for cuddling.")
                 `(where :location ,location))))))
-
-
 
 (defun story-game-new-insert (e-id loc type &rest parameters)
   (let* ((fun (gethash type story-game-standard-init))
@@ -56,19 +73,11 @@
     ;; insert ent id into location contains    
     e-id))
 
-
-
-(defun ces-new-entity-with-instantiated-components-no-id (moniker c-ids cnames)
-  (let ((ent-id (ces-new-entity moniker)))
-    (mapc (lambda(c-id)
-            (ces-insert-component-into-e2c ent-id c-id))
-          c-ids)
-    (mapc (lambda (cname)
-            (ces-insert-entity-into-c2e ent-id cname))
-          cnames)        
-    ent-id))
-
 ;; Utils
+(defun ces-seng-utils-add-ent-to-location (ent-id loc-id)
+  (ces-utils-comp-put-hash-value (ces-components-f(ces-e2c-f loc-id))
+                                 'contains :hash ent-id t))
+
 (defun ces-utils-replace-component-info (components details)
   (let ((components (copy-alist components))
         (detail (pop details)))
@@ -89,35 +98,9 @@
 
 
 ;; Loader
-(defun ces-loader-insert-components (comps)
-  (mapcar (lambda (component)
-            (ces-insert-component-into-components component))
-          comps))
 
-(defun ces-loader-read-buffer (buffer)
-  (with-current-buffer (get-buffer buffer)
-    (goto-char (point-min))
-    (read (current-buffer))))
 
-(defun ces-loader-load (buffer)
-  (let ((data (eval (ces-loader-read-buffer buffer))))
-    (mapcar
-     (lambda (entity)
-       (let ((ent-id (car entity))
-             (moniker (cadr entity))
-             (c-ids (ces-loader-insert-components
-                            (cddr  entity))))
-         ;; (message "entity: %s\n" entity)
-         (ces-new-entity-with-instantiated-components
-           ent-id moniker c-ids (mapcar 'car (ces-components-f c-ids)))))
-     data)))
-
-(defun ces-set-c&e-insert ()
-  (setq e-insert (ces-insert-entity-bld
-                  (+ 1 (apply 'max 0 (hash-table-keys entities)))))
-  (setq c-insert (ces-insert-component-bld
-                  (+ 1 (apply 'max 0 (hash-table-keys components))))))
-
+;; CES
 (defun ces-new-entity-with-instantiated-components (ent-id moniker c-ids cnames)
   (puthash ent-id moniker entities)
   (mapc (lambda(c-id)
@@ -128,45 +111,12 @@
         cnames)        
   ent-id)
 
-(defun ces-loader-test (fun)
-  (let (c2e e2c components entities generals components-def systems-def
-            c-insert e-insert)
-    (ces-init-globs)
-    (apply 'funcall '(ces-seng-systems))
-    (apply 'funcall '(ces-seng-components))
-    (ces-set-c&e-insert)
-    (ces-loader-load "game-mid.el")
-    (funcall fun)
-    )
-  )
-
-
-(defun ces-loader (init-systems init-components buffer)
-  (let (c2e e2c components entities generals components-def systems-def
-            c-insert e-insert)
-    (ces-init-globs)
-    (apply 'funcall init-systems)
-    (apply 'funcall init-components)
-    (ces-set-c&e-insert)
-    (ces-loader-load buffer)    
-    (list :c2e c2e :e2c e2c :components components :entities entities
-     :generals generals :components-def components-def :systems-def systems-def)
-  )
-  )
-
-
-(plist-get (ces-loader '(ces-seng-systems) '(ces-seng-components) "game-mid.el") :c-insert)
-
-(ces-loader '(ces-seng-systems) '(ces-seng-components) "game-min.el")
-
-
-;; (ces-tick 
-;;           (lambda() (ces-c2e-f 'named)))
-
-(require 'subr-x)
-
-(ces-loader-test (lambda()
-                   (let  ((story-game-loader-location-alist nil))
-                     (eval (ces-loader-read-buffer "game-mid.el"))
-                     story-game-loader-location-alist
-                      (hash-table-keys components))))
+(defun ces-new-entity-with-instantiated-components-no-id (moniker c-ids cnames)
+  (let ((ent-id (ces-new-entity moniker)))
+    (mapc (lambda(c-id)
+            (ces-insert-component-into-e2c ent-id c-id))
+          c-ids)
+    (mapc (lambda (cname)
+            (ces-insert-entity-into-c2e ent-id cname))
+          cnames)        
+    ent-id))

@@ -1,4 +1,4 @@
-;;; ces.el --- Emacs Game Engine  -*- lexical-binding: t -*-
+;;; ces.el --- Emacs Game Engine -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2018 Alexander Griffith
 ;; Author: Alexander Griffith <griffitaj@gmail.com>
@@ -28,6 +28,17 @@
 ;;; Code:
 
 (require 'subr-x)
+
+(defvar c2e nil)
+(defvar e2c nil)
+(defvar generals nil)
+(defvar components-def nil)
+(defvar systems-def nil)
+(defvar components nil)
+(defvar c-insert nil)
+(defvar e-insert nil)
+(defvar entities nil)
+(defvar message-queue nil)
 
 (defun ces-make-set ()
   (make-hash-table))
@@ -306,9 +317,9 @@
 
 (defun ces-set-c&e-insert ()
   (setq e-insert (ces-insert-entity-bld
-                  (+ 1 (apply 'max (hash-table-keys entities)))))
+                  (+ 1 (apply 'max 0 (hash-table-keys entities)))))
   (setq c-insert (ces-insert-component-bld
-                  (+ 1 (apply 'max (hash-table-keys components))))))
+                  (+ 1 (apply 'max 0 (hash-table-keys components))))))
 
 (defun ces-insert-component-struct-into-components (cstruct)
   (let ((c-id (car cstruct))
@@ -341,8 +352,9 @@
   (tick state (lambda () (funcall fun))))
 
 (defun ces-event-send-message (state type &rest cargs)
-  (tick state (lambda() (push (list 'player (float-time) type cargs)
-                              message-queue))))
+  (tick state (lambda()
+                (push (list 'player (float-time) type cargs)
+                      message-queue))))
 
 (defun ces-event-poll (state)
   (tick state

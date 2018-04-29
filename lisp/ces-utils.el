@@ -29,6 +29,9 @@
 (defun ces-utils-comp-get-value (comps component-name key)
   (plist-get (cdr (assoc component-name comps)) key))
 
+(defun ces-utils-comp-put-hash-value (comps component-name key hashkey value)
+  (puthash hashkey value (plist-get (cdr (assoc component-name comps)) key)))
+
 (defun ces-utils-comp-get-plist (components component-name)
   (cdr (assoc component-name components)) )
 
