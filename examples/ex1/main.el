@@ -2,6 +2,25 @@
 (mapc 'load-file (directory-files "~/Development/elisp/ces/lisp/" t ".el"))
 (setq debug-on-error t)
 
+(defconst story-game-timeline-buffer "*ces-seng-rend-test*"
+  "Timeline buffer of story game.")
+
+(defconst story-game-look-buffer "*ces-seng-look*"
+  "Timeline buffer of story game.")
+
+
+(defconst story-game-debug-buffer "*story-game-debug*"
+  "Debug buffer of story game.")
+
+(defconst story-game-repl-buffer "*ces-repl*"
+  "Debug buffer of story game.")
+
+(defvar story-game-state  nil)
+
+(defvar story-game-step 0)
+
+(defvar story-game-init-message (lambda()
+                                  `(:body "Welcome to life Glen." :ent-id 0 :when ,(current-time))))
 
 (defvar story-game-ids #s(hash-table test equal data ("animals" 1024
                                                       "locations" 1024
@@ -112,48 +131,112 @@
     ;; insert ent id into location contains    
     e-id))
 
+;; Start game,
+;; Open create repl, create timeline
+
+(defun story-game-start-repl ()
+  "Start a new repl with some test functions."
+  (let ((buffer (get-buffer-create story-game-repl-buffer))        
+        (fun-alist `(("move" . ,(story-game-controls-wrap 'ces-seng-controls-mv))
+                     ("look" . ,(story-game-controls-wrap 'ces-seng-controls-ls))
+                     ("close" . ,(story-game-controls-wrap 'ces-seng-controls-close))
+                     ("inspect" . ,(story-game-controls-wrap 'ces-seng-controls-cat))
+                     ("talk" . ,(story-game-controls-wrap 'ces-seng-controls-talk))
+                     ("show" . ,(story-game-controls-wrap 'ces-seng-controls-show))
+                     ("stomp" . ,(story-game-controls-wrap 'ces-seng-controls-stomp))
+                     ("grab" . ,(story-game-controls-wrap 'ces-seng-controls-grab))
+                     ("drop" . ,(story-game-controls-wrap 'ces-seng-controls-drop))
+                     ("commands" . (lambda (&rest _body)
+                                     (mapconcat 'identity
+                                                '("move" "look" "inspect" "talk"
+                                                  "show"
+                                                  "stomp" "grab" "drop" "close")
+                                                " "))))))
+    (with-current-buffer  buffer
+      (ces-repl buffer)
+      (ces-repl-add-function-keywords fun-alist)
+      (ces-repl-load-functions fun-alist)            
+      (font-lock-add-keywords nil ces-repl-test-highlights)
+      (switch-to-buffer-other-window buffer))))
+
+(defun story-game-start ()
+  (interactive)
+  (setq story-game-state (story-game-load "game-timer.el"))
+  (ces-tick story-game-state (lambda() (ces-seng-rend-start
+                                        (funcall story-game-init-message))))
+  (with-current-buffer (get-buffer-create story-game-debug-buffer)
+    (delete-region (point-min) (point-max)))
+  (story-game-start-repl)
+  (story-game-loop story-game-state))
+
+(defun story-game-quit ()
+  (interactive)
+  (with-current-buffer (get-buffer-create story-game-timeline-buffer)
+    (kill-this-buffer))
+  (with-current-buffer (get-buffer-create story-game-repl-buffer)
+    (kill-this-buffer))
+  (kill-buffer "*ces-seng-look*")
+  (ces-seng-controls-quit story-game-state))
+
+(defun story-game-loop (game-state)
+  (story-game-debug ":: tick %s\n" story-game-step)
+  (ces-event-poll story-game-state)
+  (ces-system-dispatch game-state 'player-move 'calculate-favour 'check-timers)
+  (setq story-game-step (+ story-game-step 1))
+  (let ((quit (car (plist-get (ces-check-general game-state 'quit) :args))))
+    (if quit
+        (story-game-debug "Game quit!")
+      (run-at-time (time-add (current-time) (seconds-to-time 0.333333))
+                    nil ;; don't repeat
+                    #'story-game-loop
+                    story-game-state))
+    nil))
+
+(defun story-game-debug (str &rest args)
+    (with-current-buffer (get-buffer-create story-game-debug-buffer)
+      (let ((print-level nil)
+            (print-length nil))        
+        (save-excursion
+          (goto-char (point-max))
+          (insert (apply 'format str args)))))
+    nil)
 
 
-
-;; Timers global entity
-
-;; new task, move npc from one room to another
-;; (ces-seng-utils-move )
-;; the player requires a timer
-;; 1. check if provided direction is valid
-;; 2. set timer to move in that direction
-;; 3. return message that you are moving towards that direction
-
-;; schedule format parser
+(defun story-game-load (buffer)
+   (ces-loader '(ces-seng-systems) '(ces-seng-components)
+               'story-game-loader `(,buffer)
+               story-game-generals-init))
 
 
+(defun story-game-controls-wrap (fun)
+  (lambda (&rest body)
+    (ces-tick story-game-state (lambda () (apply fun story-game-state  body)))))
 
-(setq story-game-state (ces-loader '(ces-seng-systems) '(ces-seng-components)
-                                   'story-game-loader '("game-timer.el")
-                                   story-game-generals-init))
+(story-game-start)
 
-(ces-tick story-game-state (lambda()
-                             ;; (ces-utils-comp-get-plist-e 0 'equipment)))
-                             ;; (ces-components-f (ces-e2c-f 2049))))
-                             (hash-table-keys (ces-seng-utils-get-equipment-attributes-union 0))))
+(story-game-quit)
 
-(ces-check-general story-game-state 'player-location)
 
-(ces-system-dispatch story-game-state 'calculate-favour)
+;;(ces-check-general story-game-state 'player-location)
+
+;;(ces-system-dispatch story-game-state 'calculate-favour)
 
 ;; call to check timers is not working mapcar ces-components-f, the issue is
 ;; in the rendering pipeline
-(ces-system-dispatch story-game-state 'check-timers)
+;; (ces-system-dispatch story-game-state 'check-timers)
 
-(ces-serialize-human story-game-state "*test*")
+;; (ces-serialize-human story-game-state "*test*")
 
-(ces-event-send-message story-game-state 'player-move `(0 move (0 1) 1
-                                                          "You begin to move back."
-                                                          "You failed to move"
-                                                          "You've moved back"))
-(ces-event-poll story-game-state)
+;; (ces-event-send-message story-game-state 'player-move `(0 move (0 1) 1
+;;                                                           "You begin to move back."
+;;                                                           "You failed to move"
+;;                                                           "You've moved back"))
 
-(ces-system-dispatch story-game-state 'player-move)
+;; (ces-seng-controls-mv story-game-state :north)
+
+;; (ces-event-poll story-game-state)
+
+;; (ces-system-dispatch story-game-state 'player-move)
 
 
 

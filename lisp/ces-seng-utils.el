@@ -43,6 +43,5 @@
                                                    'attributes :hash)))
               (when set
                 (push set sets))))
-          keys)
-    (message  "%s"  sets)
+          keys)    
     (apply 'ces-set-union sets)))

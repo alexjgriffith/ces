@@ -1,4 +1,4 @@
-;;; ces-seng-reng.el --- Emacs Story Engine -*- lexical-binding: t -*-
+;;; ces-seng-rend.el --- Emacs Story Engine -*- lexical-binding: t -*-
 
 ;; Copyright (C) 2018 Alexander Griffith
 ;; Author: Alexander Griffith <griffitaj@gmail.com>
@@ -26,10 +26,6 @@
 ;;; Commentary:
 
 ;;; Code:
-
-
-;; -*- lexical-binding: t -*-
-
 
 (autoload 'special-mode "simple")
 
@@ -96,6 +92,15 @@
     (:body "A deer has entered the dell." :ent-id 10 :when ,(current-time))
     (:body "A deer makes a deer sound." :ent-id 10 :when ,(current-time))))
 
+(defun ces-seng-rend-start (start-up-message &optional message-buffer)
+  (let ((message-buffer (or message-buffer "*ces-seng-rend-test*")))
+    (with-current-buffer (get-buffer-create message-buffer)
+      (let ((inhibit-read-only t))
+        (delete-region (point-min) (point-max)))
+      (ces-seng-rend-mode)
+      (ces-seng-rend-render-message start-up-message  message-buffer)
+      (switch-to-buffer-other-window (current-buffer)))))
+
 (defun ces-seng-rend-test ()
   (let ((message-buffer "*ces-seng-rend-test*"))
    (with-current-buffer (get-buffer-create message-buffer)
@@ -135,6 +140,67 @@
       (concat "\n\n"
               (propertize "Attributes" 'face font-lock-builtin-face)
               "\n============\n" text))))
+
+(defun ces-seng-rend-add-location-details (ent-id)
+  (let ((hash (ces-utils-comp-get-value-e ent-id 'exits :hash)))
+    (when hash
+      (let (text)
+        (maphash (lambda (dir ent-id)
+                   (let ((location (ces-seng-rend-create-linkable
+                                    (propertize 
+                                     (ces-utils-comp-get-value-e
+                                      ent-id 'named :dname)
+                                     'face font-lock-variable-name-face)
+                                    ent-id))
+                         (dir (format "%s" dir)))
+                     (if text
+                         (setq text (concat text ", " dir " - " location))
+                       (setq text (concat  dir " - " location)))
+
+                     )
+                   )
+                 hash)
+         (concat "\n\n"
+              (propertize "Exits" 'face font-lock-builtin-face)
+              "\n============\n" text)
+        ))
+      )
+  )
+
+(defun ces-seng-rend-add-contents (ent-id)
+  (let ((hash (ces-utils-comp-get-value-e ent-id 'contains :hash)))
+    (when hash
+      (let (text)
+        (maphash (lambda (ent-id _value)                   
+                   (let ((link-str (ces-seng-rend-create-linkable
+                                    (propertize 
+                                     (ces-utils-comp-get-value-e
+                                      ent-id 'named :dname)
+                                     'face font-lock-variable-name-face)
+                                    ent-id)))
+                   (if text
+                       (setq text (concat text " - " link-str))
+                     (setq text link-str)
+                     )))
+                 hash)        
+      (concat "\n\n"
+              (propertize "Contents" 'face font-lock-builtin-face)
+              "\n============\n" text)))
+    ))
+
+
+(defun ces-seng-rend-add-where (ent-id)
+  (let ((loc (ces-utils-comp-get-value-e ent-id 'where :location)))
+    (when loc
+      (let* ((link-str (ces-seng-rend-create-linkable
+                       (propertize 
+                        (ces-utils-comp-get-value-e
+                         loc 'named :dname)
+                        'face font-lock-variable-name-face)
+                       loc)))
+        (concat "\n\n"
+                (propertize "Location" 'face font-lock-builtin-face)
+                "\n============\n" link-str)))))
 
 ;; this function and below has to be cleaned up to handle the ces
 (defun ces-seng-rend-entity (ent-id &optional comps)
@@ -179,6 +245,7 @@
                      (hand (plist-get equipment :hand))
                      (ring (plist-get equipment :ring)))
                  (ces-tick
+                  ;; need to clean this up!!
                   story-game-state
                   (lambda ()
                   (when (or hat pants shirt)
@@ -217,19 +284,39 @@
                 interaction-text
                 "\n"
                 )
-               ))
+               )
+             (ces-tick
+              ;; need to clean this up!!
+              story-game-state
+              
+              (lambda()
+                (concat
+                 (ces-seng-rend-add-where ent-id)
+                 (ces-seng-rend-add-contents ent-id)
+                 (ces-seng-rend-add-location-details ent-id))))
+             )
      'header-section t)))
 
 (defun ces-seng-rend-display-details (point)
   (let ((props (text-properties-at point))
         (inhibit-read-only t))
    (when (and (member 'buf-name props) (member 'entity props))
-     (with-current-buffer (get-buffer-create (plist-get props 'buf-name))
+     (with-current-buffer (get-buffer-create (or "*ces-seng-look*"
+                                                 (plist-get props 'buf-name)))
        (delete-region (point-min) (point-max))
        (insert (ces-seng-rend-entity (plist-get props 'entity)
                                      (plist-get props 'components)))
        (ces-seng-rend-display-mode)
        (switch-to-buffer (current-buffer))))))
+
+
+(defun ces-seng-rend-display-details-e (ent comps buf-name)
+  (let ((inhibit-read-only t))
+    (with-current-buffer (get-buffer-create buf-name)
+       (delete-region (point-min) (point-max))
+       (insert (ces-seng-rend-entity ent comps))
+       (ces-seng-rend-display-mode)
+       (display-buffer (current-buffer)))))
 
 ;; need to add an 'entity, components and buf-name property to the byline
 
@@ -430,5 +517,5 @@
             (setq next-point (previous-single-property-change next-point prop)))
            (t next-point))))
 
-(provide 'ces-seng-reng)
-;;; ces-seng-reng.el ends here
+(provide 'ces-seng-rend)
+;;; ces-seng-rend.el ends here

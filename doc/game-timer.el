@@ -4,6 +4,9 @@
      (description :text "You, but with a love for turnips and slightly more ponchy.")
      (equipment :head nil :shirt ,(story-game-new nil 'shirt)
                 :pants ,(story-game-new nil 'pants) :shoes nil :ring nil :hand nil)
+     (moveable :time 1 :start-text "begin to move towards"
+               :abort-text "stop moving towards"
+               :end-text "have moved to")
      (attributes :hash ,(story-game-l2s '("cat"
                                           "has killed bill")))
      (where :location 1))
@@ -22,6 +25,13 @@
      (move :modifier 1.0)
      (contains :hash #s(hash-table))
      (exits :hash #s(hash-table data (:door 1))))
+  (3 "location forest-glen-2"
+     (location :floor-size 20 :obj-soft-limit 10)
+     (named :pronoun "It" :dname "Forest" :sname "forest" :rname "forest@location.2")
+     (description :text "It looks a little scary.")
+     (move :modifier 0.7)
+     (contains :hash ,(story-game-l2s '()))
+     (exits :hash ,(story-game-al2h '((:south . 1)))))
   (65 ,@(story-game-new-insert 65 2 'rat))
   (66 ,@(story-game-new-insert 66 2 'rat))
   (67 "micheal"
@@ -55,7 +65,7 @@
   (69 "timer"      
       (timers :hash
               ,(story-game-al2h
-                `(((,(float-time (time-add (current-time) (seconds-to-time 15))) move  0) .
+                `(((,(float-time (time-add (current-time) (seconds-to-time 1))) move  0) .
                    (:task move
                     :args (0 2)
                     :start-text "The player begins moving towards the door."

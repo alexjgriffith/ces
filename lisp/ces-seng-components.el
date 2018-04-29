@@ -9,6 +9,7 @@
   (ces-new-component! where :location)
   (ces-new-component! location :floor-size :obj-soft-limit)
   (ces-new-component! move :modifier)
+  (ces-new-component! moveable :time :start-text :abort-text :end-text)
   (ces-new-component! named :sname :rname :dname :pronoun)
   (ces-new-component! likes :hash :current-happiness)
   (ces-new-component! exits :hash)

@@ -1,7 +1,7 @@
 ;; -*- lexical-binding: t -*-
 
 (defun ces-seng-systems-put-in-location (loc-id ent-id)
-  (message (format "locid %s" loc-id))
+  (funcall ces-seng-debug (format "locid %s" loc-id))
   (puthash ent-id t (comp-get-value (ces-components-f (ces-e2c-f loc-id))
                                     'contains :hash))
   ent-id)
@@ -30,42 +30,15 @@
          (end-time (time-add start-time (seconds-to-time duration)))
          (key `(,(float-time end-time)
                 ,task  ,ent))
-         (value (cdr (ces-gen-component 'task 'move args
+         (value (ces-gen-component 'task 'move args
                     start-text abort-text end-text                    
-                    start-time end-time duration))))
+                    start-time end-time duration)))
     (ces-seng-system-signal-message `(:body ,start-text
                                             :ent-id ,ent
                                             :when ,start-time))
    (ces-utils-comp-put-hash-value hash 'timers :hash key value)))
 
 (defun ces-seng-systems ()
-  ;; (ces-new-system!
-  ;;  move-player
-  ;;  (player location)(player-direction)   
-  ;;  (let* ((player (car (ces-join player)))
-  ;;         (player-comps (cdr player))
-  ;;         (player-id (car player))
-  ;;         (current-loc-id (ces-utils-comp-get-value player-comps 'where :current-location))
-  ;;         (direction (car (plist-get player-direction :args)))
-  ;;         (time (car (plist-get player-direction :time))))
-  ;;    (story-game-debug "creating timer!\n")
-  ;;    (ces-seng-systems-add-location-timer
-  ;;     current-loc-id (float-time (time-add time 1.0))      
-  ;;     (lambda()
-  ;;       (story-game-debug "moving character!\n")
-  ;;       (ces-seng-systems-move-direction current-loc-id player-id player-direction))))
-  ;;  )
-  ;; (ces-new-system!
-  ;;  check-location-timers
-  ;;  (location) ()
-  ;;  (let ((meas (float-time)))
-  ;;    (mapc (lambda(loc)
-  ;;            (message (format "message: %s" (ces-utils-comp-get-value (cdr loc) 'timers :hash)))
-  ;;            (maphash (lambda(time callback)
-  ;;                       (when (< meas time)
-  ;;                         (funcall callback)))
-  ;;                   (ces-utils-comp-get-value (cdr loc) 'timers :hash)))
-  ;;          (join location))))
   (ces-new-system!
    player-move
    () (player-move)
@@ -110,7 +83,6 @@
                        (tfun (gethash task ces-seng-systems-tasks)))
                   ;; if tfun matches evaluate function with args and send a message
                   ;; if no match send a failure message
-                  (message "task:: %s" value)
                   (if tfun
                       (progn
                         (apply tfun args)
