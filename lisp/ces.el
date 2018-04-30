@@ -72,11 +72,10 @@
     setc))
 
 (defun ces-set-union-2 (seta setb)
-  (let* ((keys (hash-table-keys setb))
-         (setc (ces-copy-set seta)))
-    (mapc (lambda(key)            
-              (ces-set-set key setc))
-          keys)
+  (let* ((setc (ces-copy-set seta)))
+    (maphash (lambda(key value)            
+              (puthash key value setc))
+          setb)
     setc))
 
 (defun ces-set-intersect (&rest sets)

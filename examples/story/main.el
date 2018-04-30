@@ -53,3 +53,5 @@
           (goto-char (point-max))
           (insert (apply 'format str args)))))
     nil)
+
+(setq ces-seng-debug 'story-game-debug)

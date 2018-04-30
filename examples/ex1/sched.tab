@@ -1,0 +1,507 @@
+"taylor.0	Day 1, 8:00 AM	tavern.0		He seems to just be waking up?	
+taylor.0	Day 1, 9:00 AM	tavern.0		He's talking to Mary Beth	"Good morning Mary Beth."
+taylor.0	Day 1, 9:05 AM	town.north		He seems pretty wobbly.	He stumbles out of the Tavern.
+taylor.0	Day 1, 9:30 AM	town.north		He seems pretty wobbly.	
+taylor.0	Day 1, 9:35 AM	tailor.0		He making clothes.	He stumbles into the Tailor Shop.
+taylor.0	Day 1, 10:00 AM	tailor.0		He's working on a coat.	
+taylor.0	Day 1, 6:30 PM	tailor.0		He turns the shop sign to closed.	
+taylor.0	Day 1, 6:35 PM	town.north		He seems to be headed for the tavern.	He walks out of the Tailor Shop.
+taylor.0	Day 1, 7:00 PM	town.north		He seems to be headed for the tavern.	
+taylor.0	Day 1, 7:05 PM	tavern.0			He walks in through the front door confidently
+taylor.0	Day 1, 8:00 PM	tavern.0		There an empty bottle infront of him.	He orders a beer. 
+taylor.0	Day 1, 9:00 PM	tavern.0		There are two empty bottles in front of him.	He orders a beer.
+taylor.0	Day 1, 10:00 PM	tavern.0		There are three empty bottles in front of him.	He orders a beer.
+taylor.0	Day 1, 11:00 PM	tavern.0		He puts a fourth empty bottle beside the others and gets up.	
+taylor.0	Day 1, 11:05 PM	town.north		He seems to be headed home.	He walks out of the Tavern.
+taylor.0	Day 1, 11:30 PM	town.north		He seems to be headed home.	
+taylor.0	Day 1, 11:35 PM	tailor.0		Looks like he's off to bed.	He walks in from outside.
+taylor.0	Day 1, 11:40 PM	tailor.bedroom		He crashed into bed.	He walks in from the store front.
+mary.beth.0	Day 1, 7:00 AM	tavern.bedroom		She just waking up.	
+mary.beth.0	Day 1, 7:05 AM	tavern.0		She starts making herself breakfast.	She walks down the stair and behind the bar
+mary.beth.0	Day 1, 7:30 AM	tavern.0		She's cleaing up the bar top.	
+mary.beth.0	Day 1, 8:55 AM	tavern.0		She looks over at Taylor with a smile.	
+mary.beth.0	Day 1, 9:10 AM	tavern.0		She's wiping down tables.	
+mary.beth.0	Day 1, 11:00 AM	tavern.0		Looks like she ready to start serving.	She goes behind the bar.
+mary.beth.0	Day 1, 11:00 PM	tavern.0		Looks like she's done serving tonight.	She starts cleaning glasses.
+mary.beth.0	Day 1, 11:30 PM	tavern.0		She's cooking dinner.	
+mary.beth.0	Day 1, 11:45 PM	tavern.0		She's blowing out the candles in the Tavern.	
+mary.beth.0	Day 1, 11:50 PM	tavern.bedroom		She crawled into bed.	She's coming in the bedroom door.
+jenna.0	Day 1, 8:00 AM	blacksmith.bedroom		She's waking up.	She reaches her arms out and stratches.
+jenna.0	Day 1, 8:30 AM	blacksmith.bedroom			
+jenna.0	Day 1, 8:35 AM	blacksmith.0			She walks into the smithy.
+jenna.0	Day 1, 8:40 AM	town.north		She walks toward the south side of town	She walks out of the smithy
+jenna.0	Day 1, 9:00 AM	town.north			
+jenna.0	Day 1, 9:05 AM	town.south		She's walking towards the Temple.	She walks in from the north side of town.
+jenna.0	Day 1, 9:30 AM	town.south		She's walking towards the Temple.	
+jenna.0	Day 1, 9:35 AM	temple.0		She is worshiping at the idol of the Spirit of Peace.	She walks into the Temple.
+jenna.0	Day 1, 10:00 AM	temple.0			She walks away from the idol.
+jenna.0	Day 1, 10:05 AM	town.south		She's walking towards the north side of town	She exits the Temple.
+jenna.0	Day 1, 10:30 AM	town.south		She's walking towards the north side of town	
+jenna.0	Day 1, 10:35 AM	town.north		She's walking towards the smithy.	She walks in from the south side of town.
+jenna.0	Day 1, 11:00 AM	town.north		She's walking towards the smithy.	
+jenna.0	Day 1, 11:05 AM	blacksmith.0		She's working metal in the furnace.	She walks into the Smithy and sits at the furnace.
+jenna.0	Day 1, 11:30 AM	blacksmith.0		She's hammering metal on the anvil.	She moves over to the anvil.
+jenna.0	Day 1, 12:00 PM	blacksmith.0		She's quenching the blade. Ahhh so much steam.	She moves over to a large barrel.
+jenna.0	Day 1, 12:10 PM	blacksmith.0		She puts the completed blade down to rest.	
+jenna.0	Day 1, 12:15 PM	town.north		She's walking toward the grocery store.	She walks out of the Smithy.
+jenna.0	Day 1, 12:30 PM	town.north		She's walking toward the grocery store.	
+jenna.0	Day 1, 12:35 PM	grocery.0		She's stares awkwardly at Alice.	She walks into the Grocery Store.
+jenna.0	Day 1, 12:50 PM	grocery.0		She receives a bag of groceries from Alice.	
+jenna.0	Day 1, 1:00 PM	grocery.0		She's carrying a bag of groceries.	
+jenna.0	Day 1, 1:05 PM	town.north		She's carrying a bag of groceries as she walks toward the Smithy.	She walks out of the Grocery Store.
+jenna.0	Day 1, 1:30 PM	town.north		She's carrying a bag of groceries as she walks toward the Smithy.	
+jenna.0	Day 1, 1:35 PM	blacksmith.0		She's carrying a bag of groceries as she walks toward the back room.	She walks into the Smithy
+jenna.0	Day 1, 1:40 PM	blacksmith.bedroom		She's putting away her groceries.	She walks into the bedroom.
+jenna.0	Day 1, 1:55 PM	blacksmith.bedroom		She's walking towards the door.	
+jenna.0	Day 1, 2:00 PM	blacksmith.0		She's walking toward the furnace.	She walks out of the bedroom.
+jenna.0	Day 1, 2:15 PM	blacksmith.0		She's working metal in the furnace.	She walks into the Smithy and sits at the furnace.
+jenna.0	Day 1, 2:30 PM	blacksmith.0		She's hammering metal on the anvil.	She moves over to the anvil.
+jenna.0	Day 1, 2:45 PM	blacksmith.0		She's quenching the blade. Ahhh so much steam.	She moves over to a large barrel.
+jenna.0	Day 1, 3:00 PM	blacksmith.0		She puts the completed blade down to rest.	She moves toward the furnace.
+jenna.0	Day 1, 3:15 PM	blacksmith.0		She's working metal in the furnace.	She walks into the Smithy and sits at the furnace.
+jenna.0	Day 1, 3:30 PM	blacksmith.0		She's hammering metal on the anvil.	She moves over to the anvil.
+jenna.0	Day 1, 3:45 PM	blacksmith.0		She's quenching the blade. Ahhh so much steam.	She moves over to a large barrel.
+jenna.0	Day 1, 4:00 PM	blacksmith.0		She puts the completed blade down to rest.	She moves toward the front door.
+jenna.0	Day 1, 4:05 PM	blacksmith.0			
+jenna.0	Day 1, 4:10 PM	blacksmith.bedroom		She's reading a book.	She walks into the bedroom and sits on the bed.
+jenna.0	Day 1, 10:00 PM	blacksmith.bedroom		She's sleeping	She blows out the candle.
+alice.0	Day 1, 9:00 AM	grocery.bedroom			She wakes up.
+alice.0	Day 1, 9:05 AM	grocery.0			She walks in from the bedroom.
+alice.0	Day 1, 12:00 PM	grocery.0			
+alice.0	Day 1, 12:05 PM	town.north		She walks toward the south side of town	She walks out of the Grocery Store.
+alice.0	Day 1, 12:30 PM	town.north			
+alice.0	Day 1, 12:35 PM	town.south		She's walking towards the Temple.	She walks in from the north side of town.
+alice.0	Day 1, 1:00 PM	town.south		She's walking towards the Temple.	
+alice.0	Day 1, 1:05 PM	temple.0		She is worshiping at the idol of the Spirit of Life.	She walks into the Temple.
+alice.0	Day 1, 2:00 PM	temple.0			She walks away from the idol.
+alice.0	Day 1, 2:05 PM	town.south		She's walking towards the north side of town	She exits the Temple.
+alice.0	Day 1, 2:30 PM	town.south		She's walking towards the north side of town	
+alice.0	Day 1, 2:35 PM	town.north		She's walking towards the Grocery Store.	She walks in from the south side of town.
+alice.0	Day 1, 3:00 PM	town.north		She's walking towards the Grocery Store.	
+alice.0	Day 1, 3:05 PM	grocery.0			
+alice.0	Day 1, 6:00 PM	grocery.bedroom		She knitting	
+alice.0	Day 1, 9:00 PM	grocery.bedroom		She's crying into her hands.	
+alice.0	Day 1, 10:00 PM	grocery.bedroom		She's asleep.	
+mary.beth.0107:86:153	Day 2, 7:00 AM	tavern.bedroom		She just waking up.	
+mary.beth.0	Day 2, 7:05 AM	tavern.0		She starts making herself breakfast.	She walks down the stair and behind the bar
+mary.beth.0	Day 2, 7:30 AM	tavern.0		She's cleaing up the bar top.	
+mary.beth.0	Day 2, 8:55 AM	tavern.0		She looks over at Taylor with a smile.	
+mary.beth.0	Day 2, 9:10 AM	tavern.0		She's wiping down tables.	
+mary.beth.0	Day 2, 11:00 AM	tavern.0		Looks like she ready to start serving.	She goes behind the bar.
+mary.beth.0	Day 2, 11:00 PM	tavern.0		Looks like she's done serving tonight.	She starts cleaning glasses.
+mary.beth.0	Day 2, 11:30 PM	tavern.0		She's cooking dinner.	
+mary.beth.0	Day 2, 11:45 PM	tavern.0		She's blowing out the candles in the Tavern.	
+mary.beth.0	Day 2, 11:50 PM	tavern.bedroom		She crawled into bed.	She's coming in the bedroom door.
+jenna.0	Day 2, 8:00 AM	blacksmith.bedroom		She's waking up.	She reaches her arms out and stratches.
+jenna.0	Day 2, 8:30 AM	blacksmith.bedroom			
+jenna.0	Day 2, 8:35 AM	blacksmith.0			She walks into the smithy.
+jenna.0	Day 2, 8:40 AM	town.north		She walks toward the south side of town	She walks out of the smithy
+jenna.0	Day 2, 9:00 AM	town.north			
+jenna.0	Day 2, 9:05 AM	town.south		She's walking towards the Temple.	She walks in from the north side of town.
+jenna.0	Day 2, 9:30 AM	town.south		She's walking towards the Temple.	
+jenna.0	Day 2, 9:35 AM	temple.0		She is worshiping at the idol of the Spirit of Peace.	She walks into the Temple.
+jenna.0	Day 2, 10:00 AM	temple.0			She walks away from the idol.
+jenna.0	Day 2, 10:05 AM	town.south		She's walking towards the north side of town	She exits the Temple.
+jenna.0	Day 2, 10:30 AM	town.south		She's walking towards the north side of town	
+jenna.0	Day 2, 10:35 AM	town.north		She's walking towards the smithy.	She walks in from the south side of town.
+jenna.0	Day 2, 11:00 AM	town.north		She's walking towards the smithy.	
+jenna.0	Day 2, 11:05 AM	blacksmith.0		She's working metal in the furnace.	She walks into the Smithy and sits at the furnace.
+jenna.0	Day 2, 11:30 AM	blacksmith.0		She's hammering metal on the anvil.	She moves over to the anvil.
+jenna.0	Day 2, 12:00 PM	blacksmith.0		She's quenching the blade. Ahhh so much steam.	She moves over to a large barrel.
+jenna.0	Day 2, 12:10 PM	blacksmith.0		She puts the completed blade down to rest.	
+jenna.0	Day 2, 12:15 PM	town.north		She's walking toward the grocery store.	She walks out of the Smithy.
+jenna.0	Day 2, 12:30 PM	town.north		She's walking toward the grocery store.	
+jenna.0	Day 2, 12:35 PM	grocery.0		She's stares awkwardly at Alice.	She walks into the Grocery Store.
+jenna.0	Day 2, 12:50 PM	grocery.0		She receives a bag of groceries from Alice.	
+jenna.0	Day 2, 1:00 PM	grocery.0		She's carrying a bag of groceries.	
+jenna.0	Day 2, 1:05 PM	town.north		She's carrying a bag of groceries as she walks toward the Smithy.	She walks out of the Grocery Store.
+jenna.0	Day 2, 1:30 PM	town.north		She's carrying a bag of groceries as she walks toward the Smithy.	
+jenna.0	Day 2 1:35 PM	blacksmith.0		She's carrying a bag of groceries as she walks toward the back room.	She walks into the Smithy
+jenna.0	Day 2, 1:40 PM	blacksmith.bedroom		She's putting away her groceries.	She walks into the bedroom.
+jenna.0	Day 2, 1:55 PM	blacksmith.bedroom		She's walking towards the door.	
+jenna.0	Day 2, 2:00 PM	blacksmith.0		She's walking toward the furnace.	She walks out of the bedroom.
+jenna.0	Day 2, 2:15 PM	blacksmith.0		She's working metal in the furnace.	She walks into the Smithy and sits at the furnace.
+jenna.0	Day 2, 2:30 PM	blacksmith.0		She's hammering metal on the anvil.	She moves over to the anvil.
+jenna.0	Day 2, 2:45 PM	blacksmith.0		She's quenching the blade. Ahhh so much steam.	She moves over to a large barrel.
+jenna.0	Day 2, 3:00 PM	blacksmith.0		She puts the completed blade down to rest.	She moves toward the furnace.
+jenna.0	Day 2, 3:15 PM	blacksmith.0		She's working metal in the furnace.	She walks into the Smithy and sits at the furnace.
+jenna.0	Day 2, 3:30 PM	blacksmith.0		She's hammering metal on the anvil.	She moves over to the anvil.
+jenna.0	Day 2, 3:45 PM	blacksmith.0		She's quenching the blade. Ahhh so much steam.	She moves over to a large barrel.
+jenna.0	Day 2, 4:00 PM	blacksmith.0		She puts the completed blade down to rest.	She moves toward the front door.
+jenna.0	Day 2, 4:05 PM	blacksmith.0			
+jenna.0	Day 2, 4:10 PM	blacksmith.bedroom		She's reading a book.	She walks into the bedroom and sits on the bed.
+jenna.0	Day 2, 10:00 PM	blacksmith.bedroom		She's sleeping	She blows out the candle.
+alice.0	Day 2, 9:00 AM	grocery.bedroom			She wakes up.
+alice.0	Day 2, 9:05 AM	grocery.0			She walks in from the bedroom.
+alice.0	Day 2, 12:00 PM	grocery.0			
+alice.0	Day 2, 12:05 PM	town.north		She walks toward the south side of town	She walks out of the Grocery Store.
+alice.0	Day 2, 12:30 PM	town.north			
+alice.0	Day 2, 12:35 PM	town.south		She's walking towards the Temple.	She walks in from the north side of town.
+alice.0	Day 2, 1:00 PM	town.south		She's walking towards the Temple.	
+alice.0	Day 2, 1:05 PM	temple.0		She is worshiping at the idol of the Spirit of Life.	She walks into the Temple.
+alice.0	Day 2, 2:00 PM	temple.0			She walks away from the idol.
+alice.0	Day 2, 2:05 PM	town.south		She's walking towards the north side of town	She exits the Temple.
+alice.0	Day 2, 2:30 PM	town.south		She's walking towards the north side of town	
+alice.0	Day 2, 2:35 PM	town.north		She's walking towards the Grocery Store.	She walks in from the south side of town.
+alice.0	Day 2, 3:00 PM	town.north		She's walking towards the Grocery Store.	
+alice.0	Day 2, 3:05 PM	grocery.0			
+alice.0	Day 2, 6:00 PM	grocery.bedroom		She's knitting.	
+alice.0	Day 2, 9:00 PM	grocery.bedroom		She's crying into her hands.	
+alice.0	Day 2, 10:00 PM	grocery.bedroom		She's asleep.	
+taylor.0	Day 2, 9:00 AM	tailor.bedroom		Getting ready for the day.	Wakes up and rubs his face.
+taylor.0	Day 2, 10:00 AM	tailor.0		Working on a pair of overalls.	
+taylor.0	Day 2, 6:00 PM	town.north			
+taylor.0	Day 2, 6:30 PM	tavern.0			
+taylor.0	Day 2, 7:30 PM	tavern.0		There an empty bottle infront of him.	Orders a beer.
+taylor.0	Day 2, 8:30 PM	tavern.0		There are two empty bottles in front of him.	Orders a beer.
+taylor.0	Day 2, 9:30 PM	tavern.0		There are three empty bottles in front of him.	Orders a beer.
+taylor.0	Day 2, 10:30 PM	tavern.0		He puts a fourth empty bottle beside the others and gets up.	
+taylor.0	Day 2, 10:35 PM town.north				
+taylor.0	Day 2, 11:00 PM	tailor.0			
+taylor.0	Day 2, 11:05 PM	tailor.bedroom		He's asleep.	
+mary.beth.0107:86:153	Day 3, 7:00 AM	tavern.bedroom		She just waking up.	
+mary.beth.0	Day 3, 7:05 AM	tavern.0		She starts making herself breakfast.	She walks down the stair and behind the bar
+mary.beth.0	Day 3, 7:30 AM	tavern.0		She's cleaing up the bar top.	
+mary.beth.0	Day 3, 8:55 AM	tavern.0		She looks over at Taylor with a smile.	
+mary.beth.0	Day 3, 9:10 AM	tavern.0		She's wiping down tables.	
+mary.beth.0	Day 3, 11:00 AM	tavern.0		Looks like she ready to start serving.	She goes behind the bar.
+mary.beth.0	Day 3, 11:00 PM	tavern.0		Looks like she's done serving tonight.	She starts cleaning glasses.
+mary.beth.0	Day 3, 11:30 PM	tavern.0		She's cooking dinner.	
+mary.beth.0	Day 3, 11:45 PM	tavern.0		She's blowing out the candles in the Tavern.	
+mary.beth.0	Day 3, 11:50 PM	tavern.bedroom		She crawled into bed.	She's coming in the bedroom door.
+jenna.0	Day 3, 8:00 AM	blacksmith.bedroom		She's waking up.	She reaches her arms out and stratches.
+jenna.0	Day 3, 8:30 AM	blacksmith.bedroom			
+jenna.0	Day 3, 8:35 AM	blacksmith.0			She walks into the smithy.
+jenna.0	Day 3, 8:40 AM	town.north		She walks toward the south side of town	She walks out of the smithy
+jenna.0	Day 3, 9:00 AM	town.north			
+jenna.0	Day 3, 9:05 AM	town.south		She's walking towards the Temple.	She walks in from the north side of town.
+jenna.0	Day 3, 9:30 AM	town.south		She's walking towards the Temple.	
+jenna.0	Day 3, 9:35 AM	temple.0		She is worshiping at the idol of the Spirit of Peace.	She walks into the Temple.
+jenna.0	Day 3, 10:00 AM	temple.0			She walks away from the idol.
+jenna.0	Day 3, 10:05 AM	town.south		She's walking towards the north side of town	She exits the Temple.
+jenna.0	Day 3, 10:30 AM	town.south		She's walking towards the north side of town	
+jenna.0	Day 3, 10:35 AM	town.north		She's walking towards the smithy.	She walks in from the south side of town.
+jenna.0	Day 3, 11:00 AM	town.north		She's walking towards the smithy.	
+jenna.0	Day 3, 11:05 AM	blacksmith.0		She's working metal in the furnace.	She walks into the Smithy and sits at the furnace.
+jenna.0	Day 3, 11:30 AM	blacksmith.0		She's hammering metal on the anvil.	She moves over to the anvil.
+jenna.0	Day 3, 12:00 PM	blacksmith.0		She's quenching the blade. Ahhh so much steam.	She moves over to a large barrel.
+jenna.0	Day 3, 12:10 PM	blacksmith.0		She puts the completed blade down to rest.	
+jenna.0	Day 3, 12:15 PM	town.north		She's walking toward the grocery store.	She walks out of the Smithy.
+jenna.0	Day 3, 12:30 PM	town.north		She's walking toward the grocery store.	
+jenna.0	Day 3, 12:35 PM	grocery.0		She's stares awkwardly at Alice.	She walks into the Grocery Store.
+jenna.0	Day 3, 12:50 PM	grocery.0		She receives a bag of groceries from Alice.	
+jenna.0	Day 3, 1:00 PM	grocery.0		She's carrying a bag of groceries.	
+jenna.0	Day 3, 1:05 PM	town.north		She's carrying a bag of groceries as she walks toward the Smithy.	She walks out of the Grocery Store.
+jenna.0	Day 3, 1:30 PM	town.north		She's carrying a bag of groceries as she walks toward the Smithy.	
+jenna.0	Day 3 1:35 PM	blacksmith.0		She's carrying a bag of groceries as she walks toward the back room.	She walks into the Smithy
+jenna.0	Day 3, 1:40 PM	blacksmith.bedroom		She's putting away her groceries.	She walks into the bedroom.
+jenna.0	Day 3, 1:55 PM	blacksmith.bedroom		She's walking towards the door.	
+jenna.0	Day 3, 2:00 PM	blacksmith.0		She's walking toward the furnace.	She walks out of the bedroom.
+jenna.0	Day 3, 2:15 PM	blacksmith.0		She's working metal in the furnace.	She walks into the Smithy and sits at the furnace.
+jenna.0	Day 3, 2:30 PM	blacksmith.0		She's hammering metal on the anvil.	She moves over to the anvil.
+jenna.0	Day 3, 2:45 PM	blacksmith.0		She's quenching the blade. Ahhh so much steam.	She moves over to a large barrel.
+jenna.0	Day 3, 3:00 PM	blacksmith.0		She puts the completed blade down to rest.	She moves toward the furnace.
+jenna.0	Day 3, 3:15 PM	blacksmith.0		She's working metal in the furnace.	She walks into the Smithy and sits at the furnace.
+jenna.0	Day 3, 3:30 PM	blacksmith.0		She's hammering metal on the anvil.	She moves over to the anvil.
+jenna.0	Day 3, 3:45 PM	blacksmith.0		She's quenching the blade. Ahhh so much steam.	She moves over to a large barrel.
+jenna.0	Day 3, 4:00 PM	blacksmith.0		She puts the completed blade down to rest.	She moves toward the front door.
+jenna.0	Day 3, 4:05 PM	blacksmith.0			
+jenna.0	Day 3, 4:10 PM	blacksmith.bedroom		She's reading a book.	She walks into the bedroom and sits on the bed.
+jenna.0	Day 3, 10:00 PM	blacksmith.bedroom		She's sleeping	She blows out the candle.
+alice.0	Day 3, 9:00 AM	grocery.bedroom			She wakes up.
+alice.0	Day 3, 9:05 AM	grocery.0			She walks in from the bedroom.
+alice.0	Day 3, 12:00 PM	grocery.0			
+alice.0	Day 3, 12:05 PM	town.north		She walks toward the south side of town	She walks out of the Grocery Store.
+alice.0	Day 3, 12:30 PM	town.north			
+alice.0	Day 3, 12:35 PM	town.south		She's walking towards the Temple.	She walks in from the north side of town.
+alice.0	Day 3, 1:00 PM	town.south		She's walking towards the Temple.	
+alice.0	Day 3, 1:05 PM	temple.0		She is worshiping at the idol of the Spirit of Life.	She walks into the Temple.
+alice.0	Day 3, 2:00 PM	temple.0			She walks away from the idol.
+alice.0	Day 3, 2:05 PM	town.south		She's walking towards the north side of town	She exits the Temple.
+alice.0	Day 3, 2:30 PM	town.south		She's walking towards the north side of town	
+alice.0	Day 3, 2:35 PM	town.north		She's walking towards the Grocery Store.	She walks in from the south side of town.
+alice.0	Day 3, 3:00 PM	town.north		She's walking towards the Grocery Store.	
+alice.0	Day 3, 3:05 PM	grocery.0			
+alice.0	Day 3, 6:00 PM	grocery.bedroom		She's knitting.	
+alice.0	Day 3, 9:00 PM	grocery.bedroom		She's crying into her hands.	
+alice.0	Day 3, 10:00 PM	grocery.bedroom		She's asleep.	
+taylor.0	Day 3, 9:00 AM	tailor.bedroom		Getting ready for the day.	Wakes up and rubs his face.
+taylor.0	Day 3, 10:00 AM	tailor.0		Working on a pair of overalls.	
+taylor.0	Day 3, 6:00 PM	town.north			
+taylor.0	Day 3, 6:30 PM	tavern.0			
+taylor.0	Day 3, 7:30 PM	tavern.0		There an empty bottle infront of him.	Orders a beer.
+taylor.0	Day 3, 8:30 PM	tavern.0		There are two empty bottles in front of him.	Orders a beer.
+taylor.0	Day 3, 9:30 PM	tavern.0		There are three empty bottles in front of him.	Orders a beer.
+taylor.0	Day 3, 10:30 PM	tavern.0		He puts a fourth empty bottle beside the others and gets up.	
+taylor.0	Day 3, 10:35 PM town.north				
+taylor.0	Day 3, 11:00 PM	tailor.0			
+taylor.0	Day 3, 11:05 PM	tailor.bedroom		He's asleep.	
+mary.beth.0107:86:153	Day 4, 7:00 AM	tavern.bedroom		She just waking up.	
+mary.beth.0	Day 4, 7:05 AM	tavern.0		She starts making herself breakfast.	She walks down the stair and behind the bar
+mary.beth.0	Day 4, 7:30 AM	tavern.0		She's cleaing up the bar top.	
+mary.beth.0	Day 4, 8:55 AM	tavern.0		She looks over at Taylor with a smile.	
+mary.beth.0	Day 4, 9:10 AM	tavern.0		She's wiping down tables.	
+mary.beth.0	Day 4, 11:00 AM	tavern.0		Looks like she ready to start serving.	She goes behind the bar.
+mary.beth.0	Day 4, 11:00 PM	tavern.0		Looks like she's done serving tonight.	She starts cleaning glasses.
+mary.beth.0	Day 4, 11:30 PM	tavern.0		She's cooking dinner.	
+mary.beth.0	Day 4, 11:45 PM	tavern.0		She's blowing out the candles in the Tavern.	
+mary.beth.0	Day 4, 11:50 PM	tavern.bedroom		She crawled into bed.	She's coming in the bedroom door.
+jenna.0	Day 4, 8:00 AM	blacksmith.bedroom		She's waking up.	She reaches her arms out and stratches.
+jenna.0	Day 4, 8:30 AM	blacksmith.bedroom			
+jenna.0	Day 4, 8:35 AM	blacksmith.0			She walks into the smithy.
+jenna.0	Day 4, 8:40 AM	town.north		She walks toward the south side of town	She walks out of the smithy
+jenna.0	Day 4, 9:00 AM	town.north			
+jenna.0	Day 4, 9:05 AM	town.south		She's walking towards the Temple.	She walks in from the north side of town.
+jenna.0	Day 4, 9:30 AM	town.south		She's walking towards the Temple.	
+jenna.0	Day 4, 9:35 AM	temple.0		She is worshiping at the idol of the Spirit of Peace.	She walks into the Temple.
+jenna.0	Day 4, 10:00 AM	temple.0			She walks away from the idol.
+jenna.0	Day 4, 10:05 AM	town.south		She's walking towards the north side of town	She exits the Temple.
+jenna.0	Day 4, 10:30 AM	town.south		She's walking towards the north side of town	
+jenna.0	Day 4, 10:35 AM	town.north		She's walking towards the smithy.	She walks in from the south side of town.
+jenna.0	Day 4, 11:00 AM	town.north		She's walking towards the smithy.	
+jenna.0	Day 4, 11:05 AM	blacksmith.0		She's working metal in the furnace.	She walks into the Smithy and sits at the furnace.
+jenna.0	Day 4, 11:30 AM	blacksmith.0		She's hammering metal on the anvil.	She moves over to the anvil.
+jenna.0	Day 4, 12:00 PM	blacksmith.0		She's quenching the blade. Ahhh so much steam.	She moves over to a large barrel.
+jenna.0	Day 4, 12:10 PM	blacksmith.0		She puts the completed blade down to rest.	
+jenna.0	Day 4, 12:15 PM	town.north		She's walking toward the grocery store.	She walks out of the Smithy.
+jenna.0	Day 4, 12:30 PM	town.north		She's walking toward the grocery store.	
+jenna.0	Day 4, 12:35 PM	grocery.0		She's stares awkwardly at Alice.	She walks into the Grocery Store.
+jenna.0	Day 4, 12:50 PM	grocery.0		She receives a bag of groceries from Alice.	
+jenna.0	Day 4, 1:00 PM	grocery.0		She's carrying a bag of groceries.	
+jenna.0	Day 4, 1:05 PM	town.north		She's carrying a bag of groceries as she walks toward the Smithy.	She walks out of the Grocery Store.
+jenna.0	Day 4, 1:30 PM	town.north		She's carrying a bag of groceries as she walks toward the Smithy.	
+jenna.0	Day 4 1:35 PM	blacksmith.0		She's carrying a bag of groceries as she walks toward the back room.	She walks into the Smithy
+jenna.0	Day 4, 1:40 PM	blacksmith.bedroom		She's putting away her groceries.	She walks into the bedroom.
+jenna.0	Day 4, 1:55 PM	blacksmith.bedroom		She's walking towards the door.	
+jenna.0	Day 4, 2:00 PM	blacksmith.0		She's walking toward the furnace.	She walks out of the bedroom.
+jenna.0	Day 4, 2:15 PM	blacksmith.0		She's working metal in the furnace.	She walks into the Smithy and sits at the furnace.
+jenna.0	Day 4, 2:30 PM	blacksmith.0		She's hammering metal on the anvil.	She moves over to the anvil.
+jenna.0	Day 4, 2:45 PM	blacksmith.0		She's quenching the blade. Ahhh so much steam.	She moves over to a large barrel.
+jenna.0	Day 4, 3:00 PM	blacksmith.0		She puts the completed blade down to rest.	She moves toward the furnace.
+jenna.0	Day 4, 3:15 PM	blacksmith.0		She's working metal in the furnace.	She walks into the Smithy and sits at the furnace.
+jenna.0	Day 4, 3:30 PM	blacksmith.0		She's hammering metal on the anvil.	She moves over to the anvil.
+jenna.0	Day 4, 3:45 PM	blacksmith.0		She's quenching the blade. Ahhh so much steam.	She moves over to a large barrel.
+jenna.0	Day 4, 4:00 PM	blacksmith.0		She puts the completed blade down to rest.	She moves toward the front door.
+jenna.0	Day 4, 4:05 PM	blacksmith.0			
+jenna.0	Day 4, 4:10 PM	blacksmith.bedroom		She's reading a book.	She walks into the bedroom and sits on the bed.
+jenna.0	Day 4, 10:00 PM	blacksmith.bedroom		She's sleeping	She blows out the candle.
+alice.0	Day 4, 9:00 AM	grocery.bedroom			She wakes up.
+alice.0	Day 4, 9:05 AM	grocery.0			She walks in from the bedroom.
+alice.0	Day 4, 12:00 PM	grocery.0			
+alice.0	Day 4, 12:05 PM	town.north		She walks toward the south side of town	She walks out of the Grocery Store.
+alice.0	Day 4, 12:30 PM	town.north			
+alice.0	Day 4, 12:35 PM	town.south		She's walking towards the Temple.	She walks in from the north side of town.
+alice.0	Day 4, 1:00 PM	town.south		She's walking towards the Temple.	
+alice.0	Day 4, 1:05 PM	temple.0		She is worshiping at the idol of the Spirit of Life.	She walks into the Temple.
+alice.0	Day 4, 2:00 PM	temple.0			She walks away from the idol.
+alice.0	Day 4, 2:05 PM	town.south		She's walking towards the north side of town	She exits the Temple.
+alice.0	Day 4, 2:30 PM	town.south		She's walking towards the north side of town	
+alice.0	Day 4, 2:35 PM	town.north		She's walking towards the Grocery Store.	She walks in from the south side of town.
+alice.0	Day 4, 3:00 PM	town.north		She's walking towards the Grocery Store.	
+alice.0	Day 4, 3:05 PM	grocery.0			
+alice.0	Day 4, 6:00 PM	grocery.bedroom		She's knitting.	
+alice.0	Day 4, 9:00 PM	grocery.bedroom		She's crying into her hands.	
+alice.0	Day 4, 10:00 PM	grocery.bedroom		She's asleep.	
+taylor.0	Day 4, 9:00 AM	tailor.bedroom		Getting ready for the day.	Wakes up and rubs his face.
+taylor.0	Day 4, 10:00 AM	tailor.0		Working on a pair of overalls.	
+taylor.0	Day 4, 6:00 PM	town.north			
+taylor.0	Day 4, 6:30 PM	tavern.0			
+taylor.0	Day 4, 7:30 PM	tavern.0		There an empty bottle infront of him.	Orders a beer.
+taylor.0	Day 4, 8:30 PM	tavern.0		There are two empty bottles in front of him.	Orders a beer.
+taylor.0	Day 4, 9:30 PM	tavern.0		There are three empty bottles in front of him.	Orders a beer.
+taylor.0	Day 4, 10:30 PM	tavern.0		He puts a fourth empty bottle beside the others and gets up.	
+taylor.0	Day 4, 10:35 PM town.north				
+taylor.0	Day 4, 11:00 PM	tailor.0			
+taylor.0	Day 4, 11:05 PM	tailor.bedroom		He's asleep.	
+mary.beth.0107:86:153	Day 5, 7:00 AM	tavern.bedroom		She just waking up.	
+mary.beth.0	Day 5, 7:05 AM	tavern.0		She starts making herself breakfast.	She walks down the stair and behind the bar
+mary.beth.0	Day 5, 7:30 AM	tavern.0		She's cleaing up the bar top.	
+mary.beth.0	Day 5, 8:55 AM	tavern.0		She looks over at Taylor with a smile.	
+mary.beth.0	Day 5, 9:10 AM	tavern.0		She's wiping down tables.	
+mary.beth.0	Day 5, 11:00 AM	tavern.0		Looks like she ready to start serving.	She goes behind the bar.
+mary.beth.0	Day 5, 11:00 PM	tavern.0		Looks like she's done serving tonight.	She starts cleaning glasses.
+mary.beth.0	Day 5, 11:30 PM	tavern.0		She's cooking dinner.	
+mary.beth.0	Day 5, 11:45 PM	tavern.0		She's blowing out the candles in the Tavern.	
+mary.beth.0	Day 5, 11:50 PM	tavern.bedroom		She crawled into bed.	She's coming in the bedroom door.
+jenna.0	Day 5, 8:00 AM	blacksmith.bedroom		She's waking up.	She reaches her arms out and stratches.
+jenna.0	Day 5, 8:30 AM	blacksmith.bedroom			
+jenna.0	Day 5, 8:35 AM	blacksmith.0			She walks into the smithy.
+jenna.0	Day 5, 8:40 AM	town.north		She walks toward the south side of town	She walks out of the smithy
+jenna.0	Day 5, 9:00 AM	town.north			
+jenna.0	Day 5, 9:05 AM	town.south		She's walking towards the Temple.	She walks in from the north side of town.
+jenna.0	Day 5, 9:30 AM	town.south		She's walking towards the Temple.	
+jenna.0	Day 5, 9:35 AM	temple.0		She is worshiping at the idol of the Spirit of Peace.	She walks into the Temple.
+jenna.0	Day 5, 10:00 AM	temple.0			She walks away from the idol.
+jenna.0	Day 5, 10:05 AM	town.south		She's walking towards the north side of town	She exits the Temple.
+jenna.0	Day 5, 10:30 AM	town.south		She's walking towards the north side of town	
+jenna.0	Day 5, 10:35 AM	town.north		She's walking towards the smithy.	She walks in from the south side of town.
+jenna.0	Day 5, 11:00 AM	town.north		She's walking towards the smithy.	
+jenna.0	Day 5, 11:05 AM	blacksmith.0		She's working metal in the furnace.	She walks into the Smithy and sits at the furnace.
+jenna.0	Day 5, 11:30 AM	blacksmith.0		She's hammering metal on the anvil.	She moves over to the anvil.
+jenna.0	Day 5, 12:00 PM	blacksmith.0		She's quenching the blade. Ahhh so much steam.	She moves over to a large barrel.
+jenna.0	Day 5, 12:10 PM	blacksmith.0		She puts the completed blade down to rest.	
+jenna.0	Day 5, 12:15 PM	town.north		She's walking toward the grocery store.	She walks out of the Smithy.
+jenna.0	Day 5, 12:30 PM	town.north		She's walking toward the grocery store.	
+jenna.0	Day 5, 12:35 PM	grocery.0		She's stares awkwardly at Alice.	She walks into the Grocery Store.
+jenna.0	Day 5, 12:50 PM	grocery.0		She receives a bag of groceries from Alice.	
+jenna.0	Day 5, 1:00 PM	grocery.0		She's carrying a bag of groceries.	
+jenna.0	Day 5, 1:05 PM	town.north		She's carrying a bag of groceries as she walks toward the Smithy.	She walks out of the Grocery Store.
+jenna.0	Day 5, 1:30 PM	town.north		She's carrying a bag of groceries as she walks toward the Smithy.	
+jenna.0	Day 5 1:35 PM	blacksmith.0		She's carrying a bag of groceries as she walks toward the back room.	She walks into the Smithy
+jenna.0	Day 5, 1:40 PM	blacksmith.bedroom		She's putting away her groceries.	She walks into the bedroom.
+jenna.0	Day 5, 1:55 PM	blacksmith.bedroom		She's walking towards the door.	
+jenna.0	Day 5, 2:00 PM	blacksmith.0		She's walking toward the furnace.	She walks out of the bedroom.
+jenna.0	Day 5, 2:15 PM	blacksmith.0		She's working metal in the furnace.	She walks into the Smithy and sits at the furnace.
+jenna.0	Day 5, 2:30 PM	blacksmith.0		She's hammering metal on the anvil.	She moves over to the anvil.
+jenna.0	Day 5, 2:45 PM	blacksmith.0		She's quenching the blade. Ahhh so much steam.	She moves over to a large barrel.
+jenna.0	Day 5, 3:00 PM	blacksmith.0		She puts the completed blade down to rest.	She moves toward the furnace.
+jenna.0	Day 5, 3:15 PM	blacksmith.0		She's working metal in the furnace.	She walks into the Smithy and sits at the furnace.
+jenna.0	Day 5, 3:30 PM	blacksmith.0		She's hammering metal on the anvil.	She moves over to the anvil.
+jenna.0	Day 5, 3:45 PM	blacksmith.0		She's quenching the blade. Ahhh so much steam.	She moves over to a large barrel.
+jenna.0	Day 5, 4:00 PM	blacksmith.0		She puts the completed blade down to rest.	She moves toward the front door.
+jenna.0	Day 5, 4:05 PM	blacksmith.0			
+jenna.0	Day 5, 4:10 PM	blacksmith.bedroom		She's reading a book.	She walks into the bedroom and sits on the bed.
+jenna.0	Day 5, 10:00 PM	blacksmith.bedroom		She's sleeping	She blows out the candle.
+alice.0	Day 5, 9:00 AM	grocery.bedroom			She wakes up.
+alice.0	Day 5, 9:05 AM	grocery.0			She walks in from the bedroom.
+alice.0	Day 5, 12:00 PM	grocery.0			
+alice.0	Day 5, 12:05 PM	town.north		She walks toward the south side of town	She walks out of the Grocery Store.
+alice.0	Day 5, 12:30 PM	town.north			
+alice.0	Day 5, 12:35 PM	town.south		She's walking towards the Temple.	She walks in from the north side of town.
+alice.0	Day 5, 1:00 PM	town.south		She's walking towards the Temple.	
+alice.0	Day 5, 1:05 PM	temple.0		She is worshiping at the idol of the Spirit of Life.	She walks into the Temple.
+alice.0	Day 5, 2:00 PM	temple.0			She walks away from the idol.
+alice.0	Day 5, 2:05 PM	town.south		She's walking towards the north side of town	She exits the Temple.
+alice.0	Day 5, 2:30 PM	town.south		She's walking towards the north side of town	
+alice.0	Day 5, 2:35 PM	town.north		She's walking towards the Grocery Store.	She walks in from the south side of town.
+alice.0	Day 5, 3:00 PM	town.north		She's walking towards the Grocery Store.	
+alice.0	Day 5, 3:05 PM	grocery.0			
+alice.0	Day 5, 6:00 PM	grocery.bedroom		She's knitting.	
+alice.0	Day 5, 9:00 PM	grocery.bedroom		She's crying into her hands.	
+alice.0	Day 5, 10:00 PM	grocery.bedroom		She's asleep.	
+taylor.0	Day 5, 9:00 AM	tailor.bedroom		Getting ready for the day.	Wakes up and rubs his face.
+taylor.0	Day 5, 10:00 AM	tailor.0		Working on a pair of overalls.	
+taylor.0	Day 5, 6:00 PM	town.north			
+taylor.0	Day 5, 6:30 PM	tavern.0			
+taylor.0	Day 5, 7:30 PM	tavern.0		There an empty bottle infront of him.	Orders a beer.
+taylor.0	Day 5, 8:30 PM	tavern.0		There are two empty bottles in front of him.	Orders a beer.
+taylor.0	Day 5, 9:30 PM	tavern.0		There are three empty bottles in front of him.	Orders a beer.
+taylor.0	Day 5, 10:30 PM	tavern.0		He puts a fourth empty bottle beside the others and gets up.	
+taylor.0	Day 5, 10:35 PM town.north				
+taylor.0	Day 5, 11:00 PM	tailor.0			
+taylor.0	Day 5, 11:05 PM	tailor.bedroom		He's asleep.	
+fredrick.0	Day 1, 6:00 AM	fredricks.hut			Startled awake he grabs for his axe.
+fredrick.0	Day 1, 7:00 AM	jail.0			
+fredrick.0	Day 1, 9:00 AM	town.south		He's seems to be petrolling	
+fredrick.0	Day 1, 10:00 AM	town.north		He's seems to be petrolling	
+fredrick.0	Day 1, 11:00 AM	tavern.0		he's talking at Mary Beth	Order's a Meal.
+fredrick.0	Day 1, 12:00 PM	town.north		He's seems to be petrolling	
+fredrick.0	Day 1, 1:00 PM	town.south		He's seems to be petrolling	
+fredrick.0	Day 1, 2:00 PM	graveyard.0		He's seems to be petrolling	
+fredrick.0	Day 1, 3:00 PM	orchard.0		He's seems to be petrolling	
+fredrick.0	Day 1, 4:00 PM	graveyard.0		He's seems to be petrolling	
+fredrick.0	Day 1, 5:00 PM	town.south		He's seems to be petrolling	
+fredrick.0	Day 1, 6:00 PM	jail.0			
+fredrick.0	Day 1, 11:00 PM	fredricks.hut		He's asleep.	
+Charlotte	Day 1, 10:00 AM	library.0			She rolls off the top of a bookshelf.
+Charlotte	Day 1, 11:00 AM	town.south			
+Charlotte	Day 1, 12:00 PM	graveyard.0		She's dancing… with no one… and there's no music…	
+Charlotte	Day 1, 1:00 PM	orchard.0		She's staring at the wanderer and eating an apple.	
+Charlotte	Day 1, 1:30 PM	graveyard.0			
+Charlotte	Day 1, 2:00 PM	town.south		She's staring at the broken clock	
+Charlotte	Day 1, 3:00 PM	library.0			
+Charlotte	Day 1, 10:00 PM	town.south			
+Charlotte	Day 1, 11:00 PM	town.north		She's just staring in the grocers window.	
+Charlotte	Day 1, 11:59 PM	library.0		She's asleep behind the desk.	
+fredrick.0	Day 2, 6:00 AM	fredricks.hut			Startled awake he grabs for his axe.
+fredrick.0	Day 2, 7:00 AM	jail.0			
+fredrick.0	Day 2, 9:00 AM	town.south		He's seems to be petrolling	
+fredrick.0	Day 2, 10:00 AM	town.north		He's seems to be petrolling	
+fredrick.0	Day 2, 11:00 AM	tavern.0		he's talking at Mary Beth	Order's a Meal.
+fredrick.0	Day 2, 12:00 PM	town.north		He's seems to be petrolling	
+fredrick.0	Day 2, 1:00 PM	town.south		He's seems to be petrolling	
+fredrick.0	Day 2, 2:00 PM	graveyard.0		He's seems to be petrolling	
+fredrick.0	Day 2, 3:00 PM	orchard.0		He's seems to be petrolling	
+fredrick.0	Day 2, 4:00 PM	graveyard.0		He's seems to be petrolling	
+fredrick.0	Day 2, 5:00 PM	town.south		He's seems to be petrolling	
+fredrick.0	Day 2, 6:00 PM	jail.0			
+fredrick.0	Day 2, 11:00 PM	fredricks.hut		He's asleep.	
+Charlotte	Day 2, 10:00 AM	library.0			She rolls off the top of a bookshelf.
+Charlotte	Day 2, 11:00 AM	town.south			
+Charlotte	Day 2, 12:00 PM	graveyard.0		She's dancing… with no one… and there's no music…	
+Charlotte	Day 2, 1:00 PM	orchard.0		She's staring at the wanderer and eating an apple.	
+Charlotte	Day 2, 1:30 PM	graveyard.0			
+Charlotte	Day 2, 2:00 PM	town.south		She's staring at the broken clock	
+Charlotte	Day 2, 3:00 PM	library.0			
+Charlotte	Day 2, 10:00 PM	town.south			
+Charlotte	Day 2, 11:00 PM	town.north		She's just staring in the grocers window.	
+Charlotte	Day 2, 11:59 PM	library.0		She's asleep behind the desk.	
+fredrick.0	Day 3, 6:00 AM	fredricks.hut			Startled awake he grabs for his axe.
+fredrick.0	Day 3, 7:00 AM	jail.0			
+fredrick.0	Day 3, 9:00 AM	town.south		He's seems to be petrolling	
+fredrick.0	Day 3, 10:00 AM	town.north		He's seems to be petrolling	
+fredrick.0	Day 3, 11:00 AM	tavern.0		he's talking at Mary Beth	Order's a Meal.
+fredrick.0	Day 3, 12:00 PM	town.north		He's seems to be petrolling	
+fredrick.0	Day 3, 1:00 PM	town.south		He's seems to be petrolling	
+fredrick.0	Day 3, 2:00 PM	graveyard.0		He's seems to be petrolling	
+fredrick.0	Day 3, 3:00 PM	orchard.0		He's seems to be petrolling	
+fredrick.0	Day 3, 4:00 PM	graveyard.0		He's seems to be petrolling	
+fredrick.0	Day 3, 5:00 PM	town.south		He's seems to be petrolling	
+fredrick.0	Day 3, 6:00 PM	jail.0			
+fredrick.0	Day 3, 11:00 PM	fredricks.hut		He's asleep.	
+Charlotte	Day 3, 10:00 AM	library.0			She rolls off the top of a bookshelf.
+Charlotte	Day 3, 11:00 AM	town.south			
+Charlotte	Day 3, 12:00 PM	graveyard.0		She's dancing… with no one… and there's no music…	
+Charlotte	Day 3, 1:00 PM	orchard.0		She's staring at the wanderer and eating an apple.	
+Charlotte	Day 3, 1:30 PM	graveyard.0			
+Charlotte	Day 3, 2:00 PM	town.south		She's staring at the broken clock	
+Charlotte	Day 3, 3:00 PM	library.0			
+Charlotte	Day 3, 10:00 PM	town.south			
+Charlotte	Day 3, 11:00 PM	town.north		She's just staring in the grocers window.	
+Charlotte	Day 3, 11:59 PM	library.0		She's asleep behind the desk.	
+fredrick.0	Day 4, 6:00 AM	fredricks.hut			Startled awake he grabs for his axe.
+fredrick.0	Day 4, 7:00 AM	jail.0			
+fredrick.0	Day 4, 9:00 AM	town.south		He's seems to be petrolling	
+fredrick.0	Day 4, 10:00 AM	town.north		He's seems to be petrolling	
+fredrick.0	Day 4, 11:00 AM	tavern.0		he's talking at Mary Beth	Order's a Meal.
+fredrick.0	Day 4, 12:00 PM	town.north		He's seems to be petrolling	
+fredrick.0	Day 4, 1:00 PM	town.south		He's seems to be petrolling	
+fredrick.0	Day 4, 2:00 PM	graveyard.0		He's seems to be petrolling	
+fredrick.0	Day 4, 3:00 PM	orchard.0		He's seems to be petrolling	
+fredrick.0	Day 4, 4:00 PM	graveyard.0		He's seems to be petrolling	
+fredrick.0	Day 4, 5:00 PM	town.south		He's seems to be petrolling	
+fredrick.0	Day 4, 6:00 PM	jail.0			
+fredrick.0	Day 4, 11:00 PM	fredricks.hut		He's asleep.	
+Charlotte	Day 4, 10:00 AM	library.0			She rolls off the top of a bookshelf.
+Charlotte	Day 4, 11:00 AM	town.south			
+Charlotte	Day 4, 12:00 PM	graveyard.0		She's dancing… with no one… and there's no music…	
+Charlotte	Day 4, 1:00 PM	orchard.0		She's staring at the wanderer and eating an apple.	
+Charlotte	Day 4, 1:30 PM	graveyard.0			
+Charlotte	Day 4, 2:00 PM	town.south		She's staring at the broken clock	
+Charlotte	Day 4, 3:00 PM	library.0			
+Charlotte	Day 4, 10:00 PM	town.south			
+Charlotte	Day 4, 11:00 PM	town.north		She's just staring in the grocers window.	
+Charlotte	Day 4, 11:59 PM	library.0		She's asleep behind the desk.	
+fredrick.0	Day 5, 6:00 AM	fredricks.hut			Startled awake he grabs for his axe.
+fredrick.0	Day 5, 7:00 AM	jail.0			
+fredrick.0	Day 5, 9:00 AM	town.south		He's seems to be petrolling	
+fredrick.0	Day 5, 10:00 AM	town.north		He's seems to be petrolling	
+fredrick.0	Day 5, 11:00 AM	tavern.0		he's talking at Mary Beth	Order's a Meal.
+fredrick.0	Day 5, 12:00 PM	town.north		He's seems to be petrolling	
+fredrick.0	Day 5, 1:00 PM	town.south		He's seems to be petrolling	
+fredrick.0	Day 5, 2:00 PM	graveyard.0		He's seems to be petrolling	
+fredrick.0	Day 5, 3:00 PM	orchard.0		He's seems to be petrolling	
+fredrick.0	Day 5, 4:00 PM	graveyard.0		He's seems to be petrolling	
+fredrick.0	Day 5, 5:00 PM	town.south		He's seems to be petrolling	
+fredrick.0	Day 5, 6:00 PM	jail.0			
+fredrick.0	Day 5, 11:00 PM	fredricks.hut		He's asleep.	
+Charlotte	Day 5, 10:00 AM	library.0			She rolls off the top of a bookshelf.
+Charlotte	Day 5, 11:00 AM	town.south			
+Charlotte	Day 5, 12:00 PM	graveyard.0		She's dancing… with no one… and there's no music…	
+Charlotte	Day 5, 1:00 PM	orchard.0		She's staring at the wanderer and eating an apple.	
+Charlotte	Day 5, 1:30 PM	graveyard.0			
+Charlotte	Day 5, 2:00 PM	town.south		She's staring at the broken clock	
+Charlotte	Day 5, 3:00 PM	library.0			
+Charlotte	Day 5, 10:00 PM	town.south			
+Charlotte	Day 5, 11:00 PM	town.north		She's just staring in the grocers window.	
+Charlotte	Day 5, 11:59 PM	library.0		She's asleep behind the desk.	"

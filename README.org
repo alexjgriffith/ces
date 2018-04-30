@@ -1,14 +1,25 @@
 * ces.el
 
-A Component Entity System for emacs.
+A game writen entierly in elisp for the 2018 lisp game jam.
 
-** Installation
+** Running the Game
 
-Clone this repository and add the lisp directory to your load path.
-Then, require it and go.
+Clone this repository and add execute the following in a scratch
+buffer to play the game.
 
 #+BEGIN_SRC emacs-lisp
-    (add-to-list 'load-path "/path/to/ces.el/lisp")
-    (require 'mastodon)
+(defun game-jam-game-start (folder)
+  (load-file (concat folder "examples/ex1/main.el"))    
+  (setq debug-on-error t)
+  (load-file (concat folder "lisp/ces.el"))
+  (load-file (concat folder "lisp/ces-seng-systems.el"))
+  (mapc 'load-file (directory-files (concat folder  "lisp/") t ".el"))
+  (setq story-game-file-loc folder)
+  (story-game-start))
+
+(game-jam-game-start "~/Development/elisp/ces/")
 #+END_SRC
 
+* Commands
+
+* Interface Controls

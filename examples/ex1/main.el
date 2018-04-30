@@ -1,6 +1,8 @@
 ;; -*- lexical-binding :t -*-
-(mapc 'load-file (directory-files "~/Development/elisp/ces/lisp/" t ".el"))
-(setq debug-on-error t)
+
+(defvar story-game-file-loc "~/Development/elisp/ces/")
+
+;; (setq debug-on-error t)
 
 (defconst story-game-timeline-buffer "*ces-seng-rend-test*"
   "Timeline buffer of story game.")
@@ -140,6 +142,8 @@
         (fun-alist `(("move" . ,(story-game-controls-wrap 'ces-seng-controls-mv))
                      ("look" . ,(story-game-controls-wrap 'ces-seng-controls-ls))
                      ("close" . ,(story-game-controls-wrap 'ces-seng-controls-close))
+                     ("quit" . ,(story-game-controls-wrap 'ces-seng-controls-quit))
+                     ("timeline" . ,(story-game-controls-wrap 'ces-seng-controls-timeline))
                      ("inspect" . ,(story-game-controls-wrap 'ces-seng-controls-cat))
                      ("talk" . ,(story-game-controls-wrap 'ces-seng-controls-talk))
                      ("show" . ,(story-game-controls-wrap 'ces-seng-controls-show))
@@ -149,8 +153,8 @@
                      ("commands" . (lambda (&rest _body)
                                      (mapconcat 'identity
                                                 '("move" "look" "inspect" "talk"
-                                                  "show"
-                                                  "stomp" "grab" "drop" "close")
+                                                  "show" "timeline"
+                                                  "stomp" "grab" "drop" "close" "quit")
                                                 " "))))))
     (with-current-buffer  buffer
       (ces-repl buffer)
@@ -159,9 +163,25 @@
       (font-lock-add-keywords nil ces-repl-test-highlights)
       (switch-to-buffer-other-window buffer))))
 
+(defun story-game-build-from-tab ()
+  (with-current-buffer (get-buffer-create "*temp*")
+    (delete-region (point-min) (point-max))
+    (insert (let ((print-level nil)
+                  (print-length nil))
+              (concat "'"(pp (apply 'ces-seng-loader-import
+                                    (mapcar (lambda(file)
+                                              (concat story-game-file-loc file))
+                                            '("/examples/ex1/locations.tab"
+                                              "/examples/ex1/player.tab"
+                                              "/examples/ex1/npc.tab"
+                                              "/examples/ex1/clothing.tab"
+                                              "/examples/ex1/sched.tab")))))))
+    (current-buffer)))
+
 (defun story-game-start ()
   (interactive)
-  (setq story-game-state (story-game-load "game-timer.el"))
+  (mapc 'load-file (directory-files (concat story-game-file-loc  "lisp/") t ".el"))
+  (setq story-game-state (story-game-load (story-game-build-from-tab)))
   (ces-tick story-game-state (lambda() (ces-seng-rend-start
                                         (funcall story-game-init-message))))
   (with-current-buffer (get-buffer-create story-game-debug-buffer)
@@ -171,12 +191,15 @@
 
 (defun story-game-quit ()
   (interactive)
+  (setq ces-seng-rend-update-bool nil)
   (with-current-buffer (get-buffer-create story-game-timeline-buffer)
     (kill-this-buffer))
   (with-current-buffer (get-buffer-create story-game-repl-buffer)
     (kill-this-buffer))
-  (kill-buffer "*ces-seng-look*")
-  (ces-seng-controls-quit story-game-state))
+  (when (get-buffer "*ces-seng-look*")
+    (kill-buffer "*ces-seng-look*"))
+  ;;(ces-seng-controls-quit story-game-state)
+  )
 
 (defun story-game-loop (game-state)
   (story-game-debug ":: tick %s\n" story-game-step)
@@ -212,34 +235,8 @@
   (lambda (&rest body)
     (ces-tick story-game-state (lambda () (apply fun story-game-state  body)))))
 
-(story-game-start)
+(defun story-game-restart ()
+  (interactive)
+  (story-game-quit)
+  (story-game-start))
 
-(story-game-quit)
-
-
-;;(ces-check-general story-game-state 'player-location)
-
-;;(ces-system-dispatch story-game-state 'calculate-favour)
-
-;; call to check timers is not working mapcar ces-components-f, the issue is
-;; in the rendering pipeline
-;; (ces-system-dispatch story-game-state 'check-timers)
-
-;; (ces-serialize-human story-game-state "*test*")
-
-;; (ces-event-send-message story-game-state 'player-move `(0 move (0 1) 1
-;;                                                           "You begin to move back."
-;;                                                           "You failed to move"
-;;                                                           "You've moved back"))
-
-;; (ces-seng-controls-mv story-game-state :north)
-
-;; (ces-event-poll story-game-state)
-
-;; (ces-system-dispatch story-game-state 'player-move)
-
-
-
-
-
-;; (message "%s" #s(hash-table test les data (1 "hello" 2 "world")))

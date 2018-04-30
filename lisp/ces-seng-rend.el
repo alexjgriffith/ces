@@ -30,6 +30,7 @@
 (autoload 'special-mode "simple")
 
 ;;(require 'special-mode)
+(defvar ces-seng-rend-update-bool nil)
 
 (defvar ces-seng-rend-mode-map
   (let ((map (make-sparse-keymap)))
@@ -98,7 +99,9 @@
       (let ((inhibit-read-only t))
         (delete-region (point-min) (point-max)))
       (ces-seng-rend-mode)
+      (setq ces-seng-rend-update-bool t)
       (ces-seng-rend-render-message start-up-message  message-buffer)
+      (ces-seng-rend-update-loop (current-buffer))
       (switch-to-buffer-other-window (current-buffer)))))
 
 (defun ces-seng-rend-test ()
@@ -224,7 +227,7 @@
                                                  name ": " desc)))
                interactions))
     (when hash
-      (maphash (lambda(key value) (if (> value 0) (push key likes) (push key dislikes)))
+      (maphash (lambda(key value) (if (and value (> value 0)) (push key likes) (push key dislikes)))
              hash))
     ;;(nreverse likes)
     ;;(nreverse dislikes)
@@ -415,6 +418,17 @@
       (setq counter (+ counter 1))
       (setq next-loc  (ces-seng-rend-next-prop-t next-loc 'byline-start)))
     counter))
+
+(defun ces-seng-rend-update-loop-stop ()
+  (setq ces-seng-rend-update-bool nil))
+
+(defun ces-seng-rend-update-loop (&optional buffer)
+  (when ces-seng-rend-update-bool
+    (ces-seng-rend-update-all-times buffer)
+    (run-at-time (time-add (current-time) (seconds-to-time 3))
+                    nil ;; don't repeat
+                    #'ces-seng-rend-update-loop
+                    buffer)))
 
 (defun ces-seng-rend-update-all-times (&optional buffer override)
   (with-current-buffer (get-buffer-create (or buffer (current-buffer)))

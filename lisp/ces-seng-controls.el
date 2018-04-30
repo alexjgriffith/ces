@@ -26,7 +26,7 @@
   (ces-tick
    state
    (lambda()
-     (let* ((dir (intern-soft (car body)))            
+     (let* ((dir (intern-soft (car body)))
             (loc-details (ces-seng-utils-current-location))
             (loc-id (car loc-details))
             (exits (hash-table-keys (ces-utils-comp-get-value-e loc-id 'exits :hash)))
@@ -65,7 +65,7 @@
            (format "A viable location is required.")))))))
 
 
-(ces-tick story-game-state (lambda() (gethash :door (ces-utils-comp-get-value-e 2 'exits :hash))))
+;;(ces-tick story-game-state (lambda() (gethash :door (ces-utils-comp-get-value-e 2 'exits :hash))))
 
 ;; (defun ces-seng-controls-ls (state &rest body)
 ;;   ""
@@ -110,6 +110,12 @@
 
 (defun ces-seng-controls-close (state &rest body)
   (kill-buffer "*ces-seng-look*"))
+
+(defun ces-seng-controls-timeline (state &rest body)
+  (display-buffer story-game-timeline-buffer))
+
+(defun ces-seng-controls-quit (state &rest _body)
+  (story-game-quit))
 
 (defun ces-seng-controls-pwd (state &rest _body)
   ""  

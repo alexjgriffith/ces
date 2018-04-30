@@ -1,0 +1,27 @@
+"Cave	cave.0	A dank damp cave with a semblance of designated places for things. You likely aren’t the First to live here.	2	east: field.of.sheep, south: mine.0 
+Field of Sheep	field.of.sheep	: A field with short yellow grass and a few old sheep. The air smells fresh and free.	1	east: turnip.patch, south: orchard.0, west: cave.0
+Turnip Patch	turnip.patch	A small area of tilled dirt with a knee high fence around it. No gate but the patch does seem to be abundant with turnips.	1	east: town.north, south: graveyard.0,  west: field.of.sheep
+North side of Town	town.north	A large square designated by fine cobblestone with a well at the center. 	1	south: town.south,  west: turnip.patch, tavern: tavern.0, blacksmith-smithy: blacksmith.0, grocery-store: grocer.0, tailor-shop: tailor.0
+Tavern	tavern.0	A low lit tavern filled with the smell of old dried beer. The bar top is old and scratched and the floor has obvious warps but it inviting enough.	0.5	upstairs-door: tavern.bedroom, hatch-behind-the-bar: tavern.basement, front-door: town.north
+Tavern Basement	tavern.basement	One small candle on the wall lights the room. Large casks of ale drip intermittently. several rats scurry about.	0.5	ceiling-hatch: tavern.0
+Tavern Bedroom	tavern.bedroom	A small bedroom in what was likely intended to be a large storage closet. A small single bed sits in one corner with a small bedside table. At the foot of the bed a large chest.	0.5	door: tavern.0
+Tailor Shop	tailor.0	The store is full of mannequins almost all naked. Behind a large desk empty fabric spools can be seen. There is the faint smell of alcohol but not a bottle in sight.	0.5	back-door: tailor.bedroom, front-door: town.north
+Tailor Bedroom	tailor.bedroom	A plain bedroom with a double bed in the center and a dresser in the corner. Clothes are sprawled all over.	0.5	door: tailor.0
+Grocery Store	grocer.0	Every surface of the room is pristine. Each barrel and stand made of quality wood and solid construction. The apples and turnips shine in the light as if each one was hand washed before put out for sale.	0.5	back-door: grocer.bedroom, front-door: town.north
+Grocer Bedroom	grocer.bedroom	A very neat and tidy bedroom. Everything has its place. The bed is made and the dresser is topped with brushes and other such tools and accessories.	0.5	door: grocer.0
+Blacksmith Smithy	blacksmith.0	A dark room covered in soot with orange light pouring from large furnace. A large anvil sits in the center of the room.	0.5	back-door: blacksmith.bedroom,  front-door: town.north
+Blacksmith Bedroom	blacksmith.bedroom	A rickety old bed sits in the small room. A chest sits at the foot of the bed, clothes hanging out. Just peeking out from under the bed is an old pot.	0.5	door: blacksmith.0
+Mine	mine.0	More of a cave than a mine but the walls do seem to be abundant with ore veins thought the kind is unclear.	2	north: cave.0, east: orchard.0
+Orchard	orchard.0	A small orchard, only few rows of trees. All apple trees. 	1	north: field.of.sheep, west: mine.0, east: graveyard.0
+Graveyard	graveyard.0	Rows of tombstones dating back centuries. They seem well taken care of. Many have flowers against them.	1	north: turnip.patch, west: orchard.0, east: town.south
+South side of Town 	town.south	: A haphazard use of space. The cobblestone is old and in need of resetting. There is a small clock that seems to be broken and an empty flower bed at its base. 		north: town.north, west: graveyard.0, temple: temple.0, apothecary-shop: apothecary.0, jail: jail.0, library: library.0, hovel: jacobs.hovel, hut: fredricks.hut
+Temple	temple.0	A large high ceiling room with 6 alters spread eavenly around the edge of the room. One for each of the spirit. 	0.5	Door: town.south
+Jail	jail.0	An open room with one desk for the law keeper to sit at.	0.5	Front-door: town.south, Iron-door: jail.cell
+Jail Cell	jail.cell	A small room with blanket piled in the corner and on large iron door ominously waiting to be opened for freedom or death.	0.5	Iron-door: jail.0
+Apothecary Shop	apothecary.0	 A small shop front. The room is stuffed with flowers and clipping and and the smell is overwhelming.	0.5	Front-door: town.south, back-door: apothecary.bedroom
+Apothecary Bedroom	apothecary.bedroom	Strangely sparse. There is a small bed and Statue of the Spirit of Vengeance.	0.5	Door: apothecary.0
+Library	library.0	A very large room full of book shelves. The front desk seems to be surrounded by a musky odur.	0.5	Door: town.south
+Hut	fredricks.hut	A small hut with all the amenities, a wood stove, a dresser, a bed.	0.5	Door: town.south
+Hovel	jacobs.hovel	Barely describable as a structure one wall looks like it might fall in at any moment. Said wall seem to gain most of its support from a small bed. Some clothes hang from the ceiling.	0.5	Flap: town.south
+Cloud Birth	cloud.birth	An indescribable space. Its unclear what is up or down, bright or dark. Your senses fail you , but you are surrounded by the Spirits.		
+lost forest	forest.0	where ideas start.		"

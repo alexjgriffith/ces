@@ -1,6 +1,7 @@
 ;; -*- lexical-binding: t -*-
 
-(defun ces-seng-components ()  
+(defun ces-seng-components ()
+  (ces-new-component! attributes :hash)
   (ces-new-component! task :task :args :start-text :abort-text :end-text
                       :start :end :duration)
   (ces-new-component! timer :hash)

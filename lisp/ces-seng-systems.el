@@ -36,7 +36,7 @@
     (ces-seng-system-signal-message `(:body ,start-text
                                             :ent-id ,ent
                                             :when ,start-time))
-   (ces-utils-comp-put-hash-value hash 'timers :hash key value)))
+   (ces-utils-comp-put-hash-value hash 'timers :hash key (cdr value))))
 
 (defun ces-seng-systems ()
   (ces-new-system!
@@ -45,27 +45,29 @@
    (when player-move
      (let ((time (plist-get player-move :time))
            (args (plist-get player-move :args)))
-     (apply 'ces-seng-systems-add-timer `(,@(car args) ,time))
-     (ces-remove-general-from-generals 'player-move)))
+       ;;(story-game-debug "move: %s\n" args)       
+       (apply 'ces-seng-systems-add-timer `(,@(car args) ,time))
+       ;;(ces-serialize-human story-game-state "*temp*")
+       (ces-remove-general-from-generals 'player-move)))
    )
   (ces-new-system!
    calculate-favour
    (npc) (player-location player-ent)
-   (when player-location     
-    (let ((members (ces-utils-comp-get-value-e player-location
-                                              'contains :hash))
-          (player-attributes (ces-set-union-2
-                              (ces-seng-utils-get-equipment-attributes-union player-ent)
-                              (ces-utils-comp-get-value-e player-ent
-                                                          'attributes :hash))))
-     (mapc (lambda (n)
-             (let* ((prefs (ces-utils-comp-get-value (cdr n)
-                                                     'preferences :hash))
-                    (values (hash-table-values
-                             (ces-utils-set-filter prefs player-attributes)))
-                    (favour (min 100 (max 0 (apply '+ values)))))
-               (ces-utils-comp-put-value (cdr n) 'favour :level favour)))
-               ;; (message "favour %s: %s \n %s " (car n) values favour)))
+   (when (and player-location npc)     
+     (let ((members (ces-utils-comp-get-value-e player-location
+                                                'contains :hash))
+           (player-attributes (ces-set-union-2
+                               (ces-seng-utils-get-equipment-attributes-union player-ent)
+                               (ces-utils-comp-get-value-e player-ent
+                                                           'attributes :hash))))
+       (mapc (lambda (n)
+               (let* ((prefs (ces-utils-comp-get-value (cdr n)
+                                                       'preferences :hash))
+                      (values (hash-table-values
+                               (ces-utils-set-filter prefs player-attributes)))
+                      (favour (min 100 (max 0 (apply '+ values)))))
+                 (ces-utils-comp-put-value (cdr n) 'favour :level favour)))
+             ;; (message "favour %s: %s \n %s " (car n) values favour)))
            (ces-join npc members)))))
   (ces-new-system!
    check-timers
